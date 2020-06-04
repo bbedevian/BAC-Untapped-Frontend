@@ -34,7 +34,9 @@ class Signup extends React.Component {
     render() {
         const {name, weight, password} = this.state
         const {changeName, changePassword, changeWeight, createNewUser} = this
-        // git reve
+
+        // console.log('signup state :>> ', this.state);
+
         const radio_props = [
             {label: 'Male', value: true },
             {label: 'Female', value: false }
