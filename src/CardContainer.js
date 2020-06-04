@@ -1,20 +1,15 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View} from 'react-native';
+import { ScrollView, StyleSheet} from 'react-native';
 import BeerCard from './BeerCard'
 
 
 const CardContainer = (props) => {
-
     const { beers, selectBeer } = props
     return (
-
        <ScrollView>
-
            {beers.map(beer => <BeerCard key={beer.beer.bid} beer={beer.beer} selectBeer={selectBeer}/>)}
        </ScrollView>
-       
     )
-
 }
 
 export default CardContainer;

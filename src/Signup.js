@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text, View, TextInput, StyleSheet, TouchableOpacity, Button } from 'react-native';
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import { Text, View, TextInput, StyleSheet, Button } from 'react-native';
+import RadioForm from 'react-native-simple-radio-button';
 
 
 const initialState = {name: null, weight: null, male: null, password: null}
@@ -35,8 +35,6 @@ class Signup extends React.Component {
         const {name, weight, password} = this.state
         const {changeName, changePassword, changeWeight, createNewUser} = this
 
-        // console.log('signup state :>> ', this.state);
-
         const radio_props = [
             {label: 'Male', value: true },
             {label: 'Female', value: false }
@@ -56,10 +54,6 @@ class Signup extends React.Component {
 
             <Text>Gender</Text>
             <RadioForm radio_props={radio_props} initial={null} onPress={(value) => {this.setState({male:value})}} />
-
-            {/* <TouchableOpacity onPress={() => createNewUser()}>
-                    <Text>Submit</Text>
-            </TouchableOpacity> */}
 
             <Button title="submit" onPress={() => createNewUser()}/>
 

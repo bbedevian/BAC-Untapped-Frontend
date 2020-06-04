@@ -3,7 +3,6 @@ import { Image, StyleSheet, View, Text, TouchableHighlight, ImageBackground } fr
 
 const BeerCard = (props) => {
     const {beer, selectBeer} = props
-    // console.log('beer card props :>> ', props);
     return (
         <View style={styles.beerBox}>
             {/* <ImageBackground source={{uri: `${beer.beer_label}`}} style={styles.background}> */}
@@ -36,9 +35,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     textRight: {
-       
-        // marginTop: 15,
-        // padding: 10,
         fontSize: 20,
         alignSelf: "center",
     },

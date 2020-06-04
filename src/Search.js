@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button } from 'react-native';
 import CardContainer from './CardContainer'
 import { CLIENT_ID, CLIENT_SECRET } from 'react-native-dotenv'
 import BeerCard from './BeerCard';
@@ -18,7 +18,9 @@ class Search extends React.Component {
     
     findBeers = (beers) => {this.setState({beersArray: beers})}
 
-    selectBeer = (beer) => {this.setState({ selectedBeer: beer})}
+    selectBeer = (beer) => {this.setState({ selectedBeer: beer})} 
+    //selectBeer is where we are going to also search if beer exists
+    //and if not POST new to our DB
 
     selectServing = (size) => {this.setState({servingSize: size})}
   
@@ -31,8 +33,6 @@ class Search extends React.Component {
     }
 
     render () {
-        // console.log('Selected beer', this.state.selectedBeer)
-        console.log('Selected serving', this.state.servingSize)
         const {changeSearch, getBeers, selectBeer, selectServing} = this
         const {beersArray, search, selectedBeer} = this.state
         return (
@@ -42,10 +42,11 @@ class Search extends React.Component {
                 <View>
                     <BeerCard beer={selectedBeer}/>
                     <Serving selectServing={selectServing}/>
+                    <Button/>
                 </View>
-                :
+                : // if beers searched for but not selected..
                 <CardContainer beers={beersArray} selectBeer={selectBeer}/>
-            : 
+            : // if no beers searched for yet.. 
             <View>
             <Text>Search for a Beer!</Text>
             <TextInput style={styles.inputField} onChangeText={text => changeSearch(text)} value={search}/>
@@ -56,10 +57,8 @@ class Search extends React.Component {
             }
           </View>
         );
+    }}
 
-    }
-    
-}
 export default Search;
 
 const styles = StyleSheet.create({

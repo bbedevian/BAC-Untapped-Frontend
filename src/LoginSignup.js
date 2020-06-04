@@ -12,21 +12,15 @@ class LoginSignup extends Component {
         signup: false
     }
 
-    changeLogin = () =>{
-        this.setState({login: true})
-    }
-    changeSignup = () =>{
-        this.setState({signup: true})
-    }
+    changeLogin = () =>{this.setState({login: true})}
+    changeSignup = () =>{this.setState({signup: true})}
 
 
     render() {
     const {login, signup} = this.state
     const {changeLogin, changeSignup} = this
     const {setUser} = this.props
-    // console.log('LS props :>> ', this.props);
         return (
-            // <ImageBackground source={require('../assets/beerbackground.jpg')} resizeMode='cover' >
                 <View >
                 {!login && !signup ? 
                 <View style={styles.background}>
@@ -38,14 +32,13 @@ class LoginSignup extends Component {
                         <Text>Click Here To Sign Up</Text>
                     </TouchableOpacity>    
                 </View>
-                :
+                : // either log in or sign up based on above click
                 <View>
                     {login ?  <Login setUser={setUser}/> : null}
                     {signup ?  < Signup setUser={setUser}/> : null}
                 </View>
             }  
             </View>
-            // </ImageBackground>
             );
     }
 }

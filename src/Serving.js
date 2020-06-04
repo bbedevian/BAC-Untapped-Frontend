@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import {StyleSheet, View, Text} from 'react-native';
+import RadioForm from 'react-native-simple-radio-button';
 
 class Serving extends Component {
     
@@ -13,13 +13,10 @@ class Serving extends Component {
             {label: '750 ml', value: 25 },
           ];
         return (
-            <>
             <View style={styles.servingBox}>
                 <Text>Select your serving size</Text>
                 <RadioForm radio_props={radio_props} initial={null} onPress={(value) => selectServing(value)} />
             </View>
-                <Button title="Log It!"/>
-            </>
         );
     }
 }

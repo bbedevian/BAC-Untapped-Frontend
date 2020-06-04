@@ -31,7 +31,7 @@ class Login extends React.Component {
     render() {
         const {name, password} = this.state
         const {changeName, changePassword, handleSubmit} = this
-        // console.log('login state :>> ', this.state);
+       
         return (
             <View>
                 <Text>Username</Text>

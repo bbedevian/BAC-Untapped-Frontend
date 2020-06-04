@@ -13,23 +13,24 @@ class App extends Component {
     userBeers:[]
   }
 
-  setUser = (user) => {this.setState({ currentUser: user})}
+  setUser = (user) => {this.setState({ currentUser: user})} //this should also get said users beers
 
   changeLog = () => {this.setState({logBeer: !this.state.addBeer})}
 
-  addNewBeer = (newBeer) => {this.setState({userBeers: this.state.userBeers, newBeer})}
+  addNewBeer = (newBeer) => {
+    //POST to user_beers
+    this.setState({userBeers: this.state.userBeers, newBeer})}
 
   render () {
-    // console.log('App state :>> ', this.state);
     const {currentUser, logBeer} = this.state
-    const {setUser, changeLog} = this
+    const {setUser, changeLog, addNewBeer} = this
     return (
       <NavigationContainer>
       <View style={styles.container}>
         {!currentUser ? 
         <LoginSignup setUser={setUser}/>
         :
-        logBeer ? <Search changeLog={changeLog}/> : <Home changeLog={changeLog}/>
+        logBeer ? <Search changeLog={changeLog} addNewBeer={addNewBeer}/> : <Home changeLog={changeLog}/>
         }
       </View>
       </NavigationContainer>
