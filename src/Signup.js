@@ -57,11 +57,11 @@ class Signup extends React.Component {
             <Text>Gender</Text>
             <RadioForm radio_props={radio_props} initial={null} onPress={(value) => {this.setState({male:value})}} />
 
-            <TouchableOpacity onPress={() => createNewUser()}>
+            {/* <TouchableOpacity onPress={() => createNewUser()}>
                     <Text>Submit</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
-            {/* <Button title="submit" onPress={() => createNewUser()}/> */}
+            <Button title="submit" onPress={() => createNewUser()}/>
 
         </View>
         );
