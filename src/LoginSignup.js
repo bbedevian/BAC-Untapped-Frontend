@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Dimensions, ImageBackground} from 'react-native';
 import Login from './Login';
 import Signup from './Signup';
 
@@ -26,25 +26,27 @@ class LoginSignup extends Component {
     const {setUser} = this.props
     // console.log('LS props :>> ', this.props);
         return (
-            <View >
-            {!login && !signup ? 
-            <View style={styles.background}>
-                <Text style={styles.welcomeText}>Login or Signup Page</Text>
-                <TouchableOpacity style={styles.loginButton} onPress={changeLogin}>
-                    <Text>Click Here To Login</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.signupButton}onPress={changeSignup}>
-                    <Text>Click Here To Sign Up</Text>
-                </TouchableOpacity>    
+            // <ImageBackground source={require('../assets/beerbackground.jpg')} resizeMode='cover' >
+                <View >
+                {!login && !signup ? 
+                <View style={styles.background}>
+                    <Text style={styles.welcomeText}>Login or Signup Page</Text>
+                    <TouchableOpacity style={styles.loginButton} onPress={changeLogin}>
+                        <Text>Click Here To Login</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.signupButton}onPress={changeSignup}>
+                        <Text>Click Here To Sign Up</Text>
+                    </TouchableOpacity>    
+                </View>
+                :
+                <View>
+                    {login ?  <Login setUser={setUser}/> : null}
+                    {signup ?  < Signup setUser={setUser}/> : null}
+                </View>
+            }  
             </View>
-            :
-            <View>
-                {login ?  <Login setUser={setUser}/> : null}
-                {signup ?  < Signup setUser={setUser}/> : null}
-            </View>
-        }  
-        </View>
-        );
+            // </ImageBackground>
+            );
     }
 }
 
