@@ -1,13 +1,36 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import LoginSignup from './src/LoginSignup';
+import { NavigationContainer } from '@react-navigation/native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
-}
+class App extends Component {
+
+  state = {
+    currentUser: null,
+  }
+
+  setUser = (user) => {
+    this.setState({ currentUser: user})
+  }
+
+  render () {
+    console.log('App state :>> ', this.state);
+    const {currentUser} = this.state
+    const {setUser} = this
+    return (
+      <NavigationContainer>
+      <View style={styles.container}>
+        {!currentUser ? 
+        <LoginSignup setUser={setUser}/>
+        :
+        null
+        }
+      </View>
+      </NavigationContainer>
+    );
+  }
+
+  }
 
 const styles = StyleSheet.create({
   container: {
@@ -17,3 +40,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default App;
