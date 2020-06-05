@@ -19,9 +19,10 @@ class LoginSignup extends Component {
     render() {
     const {login, signup} = this.state
     const {changeLogin, changeSignup} = this
-    const {setUser} = this.props
+    const {setUser, navigation} = this.props
+    // console.log('props :>> ', this.props);
         return (
-                <View >
+                <View style={styles.background}>
                 {!login && !signup ? 
                 <View style={styles.background}>
                     <Text style={styles.welcomeText}>Login or Signup Page</Text>
@@ -34,8 +35,8 @@ class LoginSignup extends Component {
                 </View>
                 : // either log in or sign up based on above click
                 <View>
-                    {login ?  <Login setUser={setUser}/> : null}
-                    {signup ?  < Signup setUser={setUser}/> : null}
+                    {login ?  <Login setUser={setUser} navigation={navigation}/> : null}
+                    {signup ?  < Signup setUser={setUser} navigation={navigation}/> : null}
                 </View>
             }  
             </View>
@@ -49,8 +50,9 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 
 const styles = StyleSheet.create({
     background: {
+        backgroundColor: 'rgb(255,205,0)',
         flex: 1,
-        justifyContent: "flex-end"
+        // justifyContent: "flex-end"
     },
     welcomeText: {
         position: "absolute",

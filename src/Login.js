@@ -9,7 +9,7 @@ class Login extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`https://853067e7bc1c.ngrok.io/users`)
+        fetch(`https://93fc9e8d6226.ngrok.io/users`)
             .then(response => response.json())
             .then(users => this.setState({users}))
     }
@@ -31,7 +31,7 @@ class Login extends React.Component {
     render() {
         const {name, password} = this.state
         const {changeName, changePassword, handleSubmit} = this
-       
+        const {navigation} = this.props
         return (
             <View>
                 <Text>Username</Text>
@@ -40,7 +40,7 @@ class Login extends React.Component {
                 <Text>Password</Text>
                 <TextInput style={styles.inputField} secureTextEntry={true} onChangeText={(text)=>changePassword(text)} value={password}/>
                
-                <TouchableOpacity onPress={() => handleSubmit()}>
+                <TouchableOpacity onPress={() => {handleSubmit(); navigation.navigate('Home') }}>
                     <Text>Submit</Text>
                 </TouchableOpacity>
             </View>

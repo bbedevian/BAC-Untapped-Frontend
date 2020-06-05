@@ -11,16 +11,38 @@ class Search extends React.Component {
         search: '',
         beersArray: [],
         selectedBeer: {},
-        servingSize: null
+        servingSize: null,
+        dbBeers: []
+    }
+
+    componentDidMount() {
+      fetch(`https://93fc9e8d6226.ngrok.io/beers`)
+        .then(response => response.json())
+        .then(beers => this.setState({ dbBeers: beers}))
     }
 
     changeSearch = (text) => {this.setState({search: text})}
     
     findBeers = (beers) => {this.setState({beersArray: beers})}
 
-    selectBeer = (beer) => {this.setState({ selectedBeer: beer})} 
-    //selectBeer is where we are going to also search if beer exists
-    //and if not POST new to our DB
+    selectBeer = (beer) => {
+      let existBeer = this.state.dbBeers.find(dbBeer => dbBeer.name === beer.beer_name)
+      if (existBeer){
+        this.setState({ selectedBeer: existBeer})
+      }  else {
+        let myNewBeer = {name: beer.beer_name, img_url: beer.beer_label, abv: beer.beer_abv}
+          fetch(`https://93fc9e8d6226.ngrok.io/beers`, {
+            method: 'POST',
+            headers: {
+              'accept': 'application/json',
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify(myNewBeer)
+            })
+            .then(response => response.json())
+            .then(json => this.setState({ selectedBeer: json}))
+          }
+    } 
 
     selectServing = (size) => {this.setState({servingSize: size})}
   
@@ -34,15 +56,18 @@ class Search extends React.Component {
 
     render () {
         const {changeSearch, getBeers, selectBeer, selectServing} = this
-        const {beersArray, search, selectedBeer} = this.state
+        const {beersArray, search, selectedBeer, servingSize} = this.state
+        const {addNewBeer, navigation} = this.props
+        console.log('selectedBeer :>> ', selectedBeer);
+        console.log('search props :>> ', this.props);
         return (
           <View style={styles.container}>
             {beersArray.length > 0 ? 
-                selectedBeer.beer_name ? 
+                selectedBeer.name ? 
                 <View>
                     <BeerCard beer={selectedBeer}/>
                     <Serving selectServing={selectServing}/>
-                    <Button/>
+                    <Button title={'Log It!'} onPress={() => {addNewBeer(selectedBeer, servingSize); navigation.navigate('Home')}}/>
                 </View>
                 : // if beers searched for but not selected..
                 <CardContainer beers={beersArray} selectBeer={selectBeer}/>
@@ -67,7 +92,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(255,205,0)',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 25
   },
   inputField: {
     height: 40, 

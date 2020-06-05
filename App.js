@@ -1,39 +1,73 @@
 import React, {Component} from 'react';
 import { StyleSheet, View } from 'react-native';
 import LoginSignup from './src/LoginSignup';
-import { NavigationContainer } from '@react-navigation/native';
 import Home from './src/Home'
 import Search from './src/Search'
+import History from './src/History'
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+
 
 class App extends Component {
 
   state = {
     currentUser: null,
-    logBeer: false,
-    userBeers:[]
+    userBeers:[],
   }
 
-  setUser = (user) => {this.setState({ currentUser: user})} //this should also get said users beers
+  setUser = (user) => 
+  {fetch(`https://93fc9e8d6226.ngrok.io/user_beers`)
+    .then(response => response.json())
+    .then(allUserBeers => 
+      this.setState({ currentUser: user, userBeers: allUserBeers.filter(ub => ub.user_id === user.id)})
+      )
+  } 
 
   changeLog = () => {this.setState({logBeer: !this.state.addBeer})}
 
-  addNewBeer = (newBeer) => {
-    //POST to user_beers
-    this.setState({userBeers: this.state.userBeers, newBeer})}
+  addNewBeer = (selectedBeer, size) => {
+    let uBeer = {user_id: this.state.currentUser.id, beer_id: selectedBeer.id, size: size}
+    fetch(`https://93fc9e8d6226.ngrok.io/user_beers`, {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(uBeer)
+      })
+      .then(response => response.json())
+      .then(json => console.log(json))
+    // this.setState({userBeers: this.state.userBeers, newBeer})
+  }
 
   render () {
-    const {currentUser, logBeer} = this.state
-    const {setUser, changeLog, addNewBeer} = this
+    console.log('App state :>> ', this.state);
+    const {dbBeers, userBeers} = this.state
+    const {setUser, addNewBeer} = this
     return (
-      <NavigationContainer>
-      <View style={styles.container}>
-        {!currentUser ? 
-        <LoginSignup setUser={setUser}/>
-        :
-        logBeer ? <Search changeLog={changeLog} addNewBeer={addNewBeer}/> : <Home changeLog={changeLog}/>
-        }
-      </View>
+      <NavigationContainer> 
+        <Stack.Navigator initialRouteName="LoginSignup">
+
+          <Stack.Screen name="LoginSignup" options={{ title: 'BAC Untappd' }}>
+          {props => <LoginSignup {...props} setUser={setUser} />}
+          </Stack.Screen> 
+
+          <Stack.Screen name="Search">
+          {props => <Search {...props} addNewBeer={addNewBeer} dbBeers={dbBeers} />}
+          </Stack.Screen> 
+
+          <Stack.Screen name="Home" component={Home} />
+
+          <Stack.Screen name="History">
+          {props => <History {...props} userBeers={userBeers}/>}
+          </Stack.Screen> 
+
+        </Stack.Navigator>
       </NavigationContainer>
+     
     );}}
 
 const styles = StyleSheet.create({

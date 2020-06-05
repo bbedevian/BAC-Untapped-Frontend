@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, Button, StyleSheet} from 'react-native';
+import { Text, View, Button, StyleSheet, TouchableOpacity} from 'react-native';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+
 
 class Home extends Component {
     render() {
@@ -8,8 +10,11 @@ class Home extends Component {
             <View>
                 <Text>On the home screen</Text>
                 <Text>Graph will go here</Text>
-                <Button title="Log a new beer" onPress={() => changeLog()}/>
-            </View>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('History')} >
+                    <Text>View Your Log History</Text>
+                 </TouchableOpacity>
+                <Button title="Log a new beer" onPress={() => this.props.navigation.navigate('Search')}/>
+            </View> 
         );
     }
 }

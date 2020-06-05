@@ -4,16 +4,20 @@ import { Image, StyleSheet, View, Text, TouchableHighlight, ImageBackground } fr
 const BeerCard = (props) => {
     const {beer, selectBeer} = props
     return (
+     beer.beer_label ? 
         <View style={styles.beerBox}>
-            {/* <ImageBackground source={{uri: `${beer.beer_label}`}} style={styles.background}> */}
-
             <TouchableHighlight onPress={() => selectBeer(beer)}>
             <Image style={styles.beerLogo} source={{uri: `${beer.beer_label}`}} />
             </TouchableHighlight>
             <Text style={styles.textRight}>{beer.beer_name}</Text>
             <Text style={styles.textRight}>ABV: {beer.beer_abv} %</Text>
-            {/* </ImageBackground> */}
-        </View>
+            </View>
+            : //if this BeerCard is coming from our Serving instead of from Card Container
+            <View style={styles.beerBox}>
+            <Image style={styles.beerLogo} source={{uri: `${beer.img_url}`}} />
+            <Text style={styles.textRight}>{beer.name}</Text>
+            <Text style={styles.textRight}>ABV: {beer.abv} %</Text>
+            </View>
     );
 }
 
