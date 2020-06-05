@@ -10,12 +10,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
-
 class App extends Component {
 
   state = {
     currentUser: null,
     userBeers:[],
+    dbBeers: []
+  }
+
+  componentDidMount() {
+    this.getDBbeers()
   }
 
   setUser = (user) => 
@@ -26,7 +30,15 @@ class App extends Component {
       )
   } 
 
-  changeLog = () => {this.setState({logBeer: !this.state.addBeer})}
+  addToDB = (beer) => {
+    this.setState({dbBeers: [...this.state.dbBeers, beer]})
+  }
+
+  getDBbeers = () => {
+    fetch(`https://93fc9e8d6226.ngrok.io/beers`)
+        .then(response => response.json())
+        .then(beers => this.setState({ dbBeers: beers}))
+  }
 
   addNewBeer = (selectedBeer, size) => {
     let uBeer = {user_id: this.state.currentUser.id, beer_id: selectedBeer.id, size: size}
@@ -39,14 +51,12 @@ class App extends Component {
       body: JSON.stringify(uBeer)
       })
       .then(response => response.json())
-      .then(json => console.log(json))
-    // this.setState({userBeers: this.state.userBeers, newBeer})
+      .then(json => this.setState({userBeers: [...this.state.userBeers, json]}))
   }
 
   render () {
-    console.log('App state :>> ', this.state);
     const {dbBeers, userBeers} = this.state
-    const {setUser, addNewBeer} = this
+    const {setUser, addNewBeer, addToDB, getDBbeers} = this
     return (
       <NavigationContainer> 
         <Stack.Navigator initialRouteName="LoginSignup">
@@ -56,13 +66,13 @@ class App extends Component {
           </Stack.Screen> 
 
           <Stack.Screen name="Search">
-          {props => <Search {...props} addNewBeer={addNewBeer} dbBeers={dbBeers} />}
+          {props => <Search {...props} addNewBeer={addNewBeer} dbBeers={dbBeers} addToDB={addToDB} getDBbeers={getDBbeers}/>}
           </Stack.Screen> 
 
           <Stack.Screen name="Home" component={Home} />
 
           <Stack.Screen name="History">
-          {props => <History {...props} userBeers={userBeers}/>}
+          {props => <History {...props} userBeers={userBeers} dbBeers={dbBeers}/>}
           </Stack.Screen> 
 
         </Stack.Navigator>

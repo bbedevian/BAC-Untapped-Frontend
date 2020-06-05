@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { Text, View, Button, StyleSheet, TouchableOpacity} from 'react-native';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import Visualizer from './Visualizer';
 
 
 class Home extends Component {
     render() {
-        const {changeLog} = this.props
         return (
             <View>
-                <Text>On the home screen</Text>
+                <Visualizer/>
                 <Text>Graph will go here</Text>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('History')} >
                     <Text>View Your Log History</Text>

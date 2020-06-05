@@ -12,21 +12,15 @@ class Search extends React.Component {
         beersArray: [],
         selectedBeer: {},
         servingSize: null,
-        dbBeers: []
     }
 
-    componentDidMount() {
-      fetch(`https://93fc9e8d6226.ngrok.io/beers`)
-        .then(response => response.json())
-        .then(beers => this.setState({ dbBeers: beers}))
-    }
 
     changeSearch = (text) => {this.setState({search: text})}
     
     findBeers = (beers) => {this.setState({beersArray: beers})}
 
     selectBeer = (beer) => {
-      let existBeer = this.state.dbBeers.find(dbBeer => dbBeer.name === beer.beer_name)
+      let existBeer = this.props.dbBeers.find(dbBeer => dbBeer.name === beer.beer_name)
       if (existBeer){
         this.setState({ selectedBeer: existBeer})
       }  else {
@@ -41,6 +35,8 @@ class Search extends React.Component {
             })
             .then(response => response.json())
             .then(json => this.setState({ selectedBeer: json}))
+            .then(this.props.getDBbeers())
+            // .then(json => this.setState({ selectedBeer: json}) && this.props.addToDB(json))
           }
     } 
 
@@ -58,8 +54,7 @@ class Search extends React.Component {
         const {changeSearch, getBeers, selectBeer, selectServing} = this
         const {beersArray, search, selectedBeer, servingSize} = this.state
         const {addNewBeer, navigation} = this.props
-        console.log('selectedBeer :>> ', selectedBeer);
-        console.log('search props :>> ', this.props);
+
         return (
           <View style={styles.container}>
             {beersArray.length > 0 ? 
