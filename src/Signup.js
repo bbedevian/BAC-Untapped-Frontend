@@ -15,9 +15,10 @@ class Signup extends React.Component {
 
    createNewUser = async () => {
        try {
+        let url = this.props.ngrokURL   
         let  newUser = {name: this.state.name, weight: this.state.weight, 
             password: this.state.password, male: this.state.male}
-         await fetch(`https://93fc9e8d6226.ngrok.io/users`, {
+         await fetch(`${url}/users`, {
             method: 'POST',
             headers: {
                 'accept': 'application/json',

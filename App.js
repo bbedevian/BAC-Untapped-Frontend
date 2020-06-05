@@ -18,12 +18,14 @@ class App extends Component {
     dbBeers: []
   }
 
+  ngrokURL = 'https://93fc9e8d6226.ngrok.io/'
+
   componentDidMount() {
     this.getDBbeers()
   }
 
   setUser = (user) => 
-  {fetch(`https://93fc9e8d6226.ngrok.io/user_beers`)
+  {fetch(`${this.ngrokURL}/user_beers`)
     .then(response => response.json())
     .then(allUserBeers => 
       this.setState({ currentUser: user, userBeers: allUserBeers.filter(ub => ub.user_id === user.id)})
@@ -35,14 +37,14 @@ class App extends Component {
   }
 
   getDBbeers = () => {
-    fetch(`https://93fc9e8d6226.ngrok.io/beers`)
+    fetch(`${this.ngrokURL}/beers`)
         .then(response => response.json())
         .then(beers => this.setState({ dbBeers: beers}))
   }
 
   addNewBeer = (selectedBeer, size) => {
     let uBeer = {user_id: this.state.currentUser.id, beer_id: selectedBeer.id, size: size}
-    fetch(`https://93fc9e8d6226.ngrok.io/user_beers`, {
+    fetch(`${this.ngrokURL}/user_beers`, {
       method: 'POST',
       headers: {
         'accept': 'application/json',
@@ -56,13 +58,13 @@ class App extends Component {
 
   render () {
     const {dbBeers, userBeers} = this.state
-    const {setUser, addNewBeer, addToDB, getDBbeers} = this
+    const {setUser, addNewBeer, addToDB, getDBbeers, ngrokURL} = this
     return (
       <NavigationContainer> 
         <Stack.Navigator initialRouteName="LoginSignup">
 
           <Stack.Screen name="LoginSignup" options={{ title: 'BAC Untappd' }}>
-          {props => <LoginSignup {...props} setUser={setUser} />}
+          {props => <LoginSignup {...props} setUser={setUser} ngrokURL={ngrokURL}/>}
           </Stack.Screen> 
 
           <Stack.Screen name="Search">

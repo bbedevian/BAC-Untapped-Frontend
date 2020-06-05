@@ -19,7 +19,7 @@ class LoginSignup extends Component {
     render() {
     const {login, signup} = this.state
     const {changeLogin, changeSignup} = this
-    const {setUser, navigation} = this.props
+    const {setUser, navigation, ngrokURL} = this.props
     // console.log('props :>> ', this.props);
         return (
                 <View style={styles.background}>
@@ -35,8 +35,8 @@ class LoginSignup extends Component {
                 </View>
                 : // either log in or sign up based on above click
                 <View>
-                    {login ?  <Login setUser={setUser} navigation={navigation}/> : null}
-                    {signup ?  < Signup setUser={setUser} navigation={navigation}/> : null}
+                    {login ?  <Login setUser={setUser} navigation={navigation} ngrokURL={ngrokURL}/> : null}
+                    {signup ?  < Signup setUser={setUser} navigation={navigation} ngrokURL={ngrokURL}/> : null}
                 </View>
             }  
             </View>

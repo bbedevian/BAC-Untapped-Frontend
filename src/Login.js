@@ -9,7 +9,8 @@ class Login extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`https://93fc9e8d6226.ngrok.io/users`)
+        let url = this.props.ngrokURL
+        fetch(`${url}/users`)
             .then(response => response.json())
             .then(users => this.setState({users}))
     }
