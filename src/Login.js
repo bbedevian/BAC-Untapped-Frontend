@@ -15,7 +15,6 @@ class Login extends React.Component {
             .then(users => this.setState({users}))
     }
 
-
     changeName = (text) => this.setState({name: text })
 
     changePassword = (text) => this.setState({password: text })

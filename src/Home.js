@@ -5,6 +5,8 @@ import Visualizer from './Visualizer';
 
 class Home extends Component {
     render() {
+        const {userBeers, dbBeers} = this.props
+        console.log('Home props :>> ', this.props);
         return (
             <View>
                 <Visualizer/>

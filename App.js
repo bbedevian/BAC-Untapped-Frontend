@@ -18,7 +18,7 @@ class App extends Component {
     dbBeers: []
   }
 
-  ngrokURL = 'https://93fc9e8d6226.ngrok.io/'
+  ngrokURL = 'https://04345db325ed.ngrok.io'
 
   componentDidMount() {
     this.getDBbeers()
@@ -71,7 +71,9 @@ class App extends Component {
           {props => <Search {...props} addNewBeer={addNewBeer} dbBeers={dbBeers} addToDB={addToDB} getDBbeers={getDBbeers}/>}
           </Stack.Screen> 
 
-          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Home">
+          {props => <Home {...props} userBeers={userBeers} dbBeers={dbBeers}/>}
+          </Stack.Screen> 
 
           <Stack.Screen name="History">
           {props => <History {...props} userBeers={userBeers} dbBeers={dbBeers}/>}

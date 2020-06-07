@@ -11,6 +11,11 @@ Next Next
 
 Still need to do:
 √ - Navigation 
-- fix add beer bug 
-- check password for fake login
+√- fix add beer bug 
+√- single source of grok url
+- check password on fake login
 - Header visual settings across the board
+
+Visualizer 
+- get all beers whose created date is within 2 hours of date.now function then plot them with a final hour of the calculation of time to sober
+- map through these to create the points (+2 for the post and -2 for the pre )
