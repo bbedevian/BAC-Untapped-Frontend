@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import {LineChart} from "react-native-chart-kit";
-// import { render } from 'react-dom';
 
 let today = new Date();
 
@@ -29,11 +28,12 @@ render() {
                 return {
                     size: uBeer.size,
                     time: new Date(uBeer.created_at).getTime(),
-                    abv: (dbBeers.find(dbBeer => dbBeer.id === uBeer.beer_id).abv)
+                    abv: (dbBeers.find(dbBeer => dbBeer.id === uBeer.beer_id).abv),
+                 
                     }
                 }) // end of declare beerLog
                 beerLog = beerLog.filter(
-                    log => log.time > (today.getTime() - 86400000)
+                    log => log.time > (today.getTime() - 64800000)
                     ) // end of filter to only todays beers
 
                 bacLog = beerLog.map(beer => 
@@ -53,6 +53,9 @@ render() {
     let chartData = bacLog.map(beer => {
         return total+=beer 
     })
+
+    let calories = 0
+    beerLog.forEach(beer => calories += (beer.size*beer.abv*2.5))
     
     let TTS = ((total/.016)) //gives you hours until sober
     let soberHour = (today.getHours() + Math.round(TTS))
@@ -60,21 +63,22 @@ render() {
     
     chartLabels.push(soberHour+":"+today.getMinutes())
     let firstLabel = (chartLabels[0].split(":")[0]-1)+":"+chartLabels[0].split(":")[1]
-    chartLabels.unshift(firstLabel)
+    // chartLabels.unshift(firstLabel)
     chartData.push(0)
-    chartData.unshift(0)
+    // chartData.unshift(0)
 
     let bgcolor = "#00ff00"
-    if (total > .1) {bgcolor = "#ffff00"}
-    if (total > .2) {bgcolor = "#ff3300"}
+    if (total > .08) {bgcolor = "#ffff00"}
+    if (total > .15) {bgcolor = "#ff3300"}
 
     return (
-        bacLog.length > 0 ? 
         <>
         <View style={styles.factBox}>
         <Text>Your current BAC is: {Math.round((total + Number.EPSILON) * 1000) / 1000}</Text>
         <Text>Expect to be sober in around: {Math.round((((total/.016)) + Number.EPSILON))} hours</Text>
+        <Text> {calories} calories from beer in the past 24 hours</Text>
         </View>
+        {bacLog.length > 0 ? 
         <View style={styles.graph}>
             <LineChart
             data={{
@@ -87,30 +91,27 @@ render() {
             }}
             width={Dimensions.get("window").width} // from react-native
             height={300}
-            yAxisLabel=""
-            yAxisSuffix=""
             yAxisInterval={.01}
             chartConfig={{
             backgroundColor:  "#fb8c00",
-            backgroundGradientFrom: "#fb8c00", //this should be background color
+            backgroundGradientFrom: bgcolor, 
             backgroundGradientTo: "#ffa726",
             decimalPlaces: 2, 
-            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+            labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
             style: {
-                borderRadius: 16
+                borderRadius: 8
             },
             propsForDots: {
                 r: "6",
                 strokeWidth: "2",
-                stroke: "#ffa726"
+                stroke: bgcolor
             }
             }}
         />
         </View> 
+        : null }
         </>
-        : 
-        null // while it loads dont show the graph or box
     )
         }
 }

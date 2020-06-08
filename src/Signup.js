@@ -2,8 +2,8 @@ import React from 'react';
 import { Text, View, TextInput, StyleSheet, Button } from 'react-native';
 import RadioForm from 'react-native-simple-radio-button';
 
-
 const initialState = {name: null, weight: null, male: null, password: null}
+
 class Signup extends React.Component {
     state = initialState
 
@@ -40,7 +40,7 @@ class Signup extends React.Component {
         const radio_props = [
             {label: 'Male', value: true },
             {label: 'Female', value: false },
-            {label: 'Other', value: false }
+            {label: 'Neutral', value: false } // would like to make this a hybrid but need to change backend too
           ];
         return (
             <View>
