@@ -18,7 +18,7 @@ class App extends Component {
     dbBeers: []
   }
 
-  ngrokURL = 'https://04345db325ed.ngrok.io'
+  ngrokURL = 'https://4f522a01aa76.ngrok.io'
 
   componentDidMount() {
     this.getDBbeers()
@@ -57,7 +57,7 @@ class App extends Component {
   }
 
   render () {
-    const {dbBeers, userBeers} = this.state
+    const {dbBeers, userBeers, currentUser} = this.state
     const {setUser, addNewBeer, addToDB, getDBbeers, ngrokURL} = this
     return (
       <NavigationContainer> 
@@ -68,11 +68,11 @@ class App extends Component {
           </Stack.Screen> 
 
           <Stack.Screen name="Search">
-          {props => <Search {...props} addNewBeer={addNewBeer} dbBeers={dbBeers} addToDB={addToDB} getDBbeers={getDBbeers}/>}
+          {props => <Search {...props} addNewBeer={addNewBeer} ngrokURL={ngrokURL} dbBeers={dbBeers} addToDB={addToDB} getDBbeers={getDBbeers}/>}
           </Stack.Screen> 
 
           <Stack.Screen name="Home">
-          {props => <Home {...props} userBeers={userBeers} dbBeers={dbBeers}/>}
+          {props => <Home {...props} userBeers={userBeers} dbBeers={dbBeers} currentUser={currentUser}/>}
           </Stack.Screen> 
 
           <Stack.Screen name="History">

@@ -5,12 +5,10 @@ import Visualizer from './Visualizer';
 
 class Home extends Component {
     render() {
-        const {userBeers, dbBeers} = this.props
-        console.log('Home props :>> ', this.props);
+        const {userBeers, dbBeers, currentUser} = this.props
         return (
             <View>
-                <Visualizer/>
-                <Text>Graph will go here</Text>
+                <Visualizer userBeers={userBeers} dbBeers={dbBeers} currentUser={currentUser}/>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('History')} >
                     <Text>View Your Log History</Text>
                  </TouchableOpacity>

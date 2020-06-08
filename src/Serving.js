@@ -7,10 +7,10 @@ class Serving extends Component {
     render() {
         const {selectServing} = this.props
         const radio_props = [
-            {label: '16 oz Can/Draft', value: 16 },
-            {label: '12 oz Can/Draft', value: 12 },
+            {label: '16 oz / 500 ml', value: 16 },
+            {label: '12 oz / 350ml', value: 12 },
             {label: 'taster (4oz)', value: 4 },
-            {label: '750 ml', value: 25 },
+            {label: '25 oz / 750 ml', value: 25 },
           ];
         return (
             <View style={styles.servingBox}>

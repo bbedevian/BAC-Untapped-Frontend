@@ -25,7 +25,6 @@ class LoginSignup extends Component {
                 <View style={styles.background}>
                 {!login && !signup ? 
                 <View style={styles.background}>
-                    <Text style={styles.welcomeText}>Login or Signup Page</Text>
                     <TouchableOpacity style={styles.loginButton} onPress={changeLogin}>
                         <Text>Click Here To Login</Text>
                     </TouchableOpacity>
