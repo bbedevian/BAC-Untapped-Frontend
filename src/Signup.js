@@ -35,10 +35,12 @@ class Signup extends React.Component {
     render() {
         const {name, weight, password} = this.state
         const {changeName, changePassword, changeWeight, createNewUser} = this
+        const {navigation} = this.props
 
         const radio_props = [
             {label: 'Male', value: true },
-            {label: 'Female', value: false }
+            {label: 'Female', value: false },
+            {label: 'Other', value: false }
           ];
         return (
             <View>
@@ -56,7 +58,7 @@ class Signup extends React.Component {
             <Text>Gender</Text>
             <RadioForm radio_props={radio_props} initial={null} onPress={(value) => {this.setState({male:value})}} />
 
-            <Button title="submit" onPress={() => createNewUser()}/>
+            <Button title="submit" onPress={() => {createNewUser(); navigation.navigate('Home')}}/>
 
         </View>
         );

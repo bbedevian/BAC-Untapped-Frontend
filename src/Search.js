@@ -25,7 +25,7 @@ class Search extends React.Component {
         this.setState({ selectedBeer: existBeer})
       }  else {
         let myNewBeer = {name: beer.beer_name, img_url: beer.beer_label, abv: beer.beer_abv}
-          fetch(`https://93fc9e8d6226.ngrok.io/beers`, {
+          fetch(`${this.props.ngrokURL}/beers`, {
             method: 'POST',
             headers: {
               'accept': 'application/json',
@@ -36,7 +36,6 @@ class Search extends React.Component {
             .then(response => response.json())
             .then(json => this.setState({ selectedBeer: json}))
             .then(this.props.getDBbeers())
-            // .then(json => this.setState({ selectedBeer: json}) && this.props.addToDB(json))
           }
     } 
 
