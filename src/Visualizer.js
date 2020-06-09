@@ -28,18 +28,13 @@ render() {
                 return {
                     size: uBeer.size,
                     time: new Date(uBeer.created_at).getTime(),
-                    abv: (dbBeers.find(dbBeer => dbBeer.id === uBeer.beer_id).abv),
-                 
+                    abv: (dbBeers.find(dbBeer => dbBeer.id === uBeer.beer_id).abv)
                     }
                 }) // end of declare beerLog
-                beerLog = beerLog.filter(
-                    log => log.time > (today.getTime() - 64800000)
-                    ) // end of filter to only todays beers
-
-                bacLog = beerLog.map(beer => 
-                    this.bac(beer.size, beer.abv, this.calcHours(beer))
-                    )
-                } // end of if 
+            beerLog = beerLog.filter(log => log.time > (today.getTime() - 64800000)) // filter only todays beers
+            beerLog = beerLog.filter(beer => this.bac(beer.size, beer.abv, this.calcHours(beer)) > 0)
+            bacLog = beerLog.map(beer => this.bac(beer.size, beer.abv, this.calcHours(beer)))
+            } // end of if 
 
    let chartLabels = beerLog.map(beer => {
        let x = new Date(beer.time)
@@ -76,7 +71,7 @@ render() {
         <View style={styles.factBox}>
         <Text>Your current BAC is: {Math.round((total + Number.EPSILON) * 1000) / 1000}</Text>
         <Text>Expect to be sober in around: {Math.round((((total/.016)) + Number.EPSILON))} hours</Text>
-        <Text> {calories} calories from beer in the past 24 hours</Text>
+        <Text> {calories} calories from beer</Text>
         </View>
         {bacLog.length > 0 ? 
         <View style={styles.graph}>
@@ -93,9 +88,12 @@ render() {
             height={300}
             yAxisInterval={.01}
             chartConfig={{
+                withShadow: false,
+            withInnerLines: false,
+            withOuterLines: false,
             backgroundColor:  "#fb8c00",
             backgroundGradientFrom: bgcolor, 
-            backgroundGradientTo: "#ffa726",
+            backgroundGradientTo: bgcolor,
             decimalPlaces: 2, 
             color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
             labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
@@ -110,7 +108,8 @@ render() {
             }}
         />
         </View> 
-        : null }
+        // dont show graph when loading
+        : null}
         </>
     )
         }
@@ -130,6 +129,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     graph: {
-        marginTop: 25
+        marginTop: 25,
+        borderColor: 'black',
+        borderWidth: 1
     }
 })

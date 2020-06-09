@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Image, Button } from 'react-native';
 import LoginSignup from './src/LoginSignup';
 import Home from './src/Home'
 import Search from './src/Search'
 import History from './src/History'
+import Analytics from './src/Analytics'
+import Settings from './src/Settings'
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
+
 
 const Stack = createStackNavigator();
 
@@ -18,7 +23,7 @@ class App extends Component {
     dbBeers: []
   }
 
-  ngrokURL = 'https://d42644269cb7.ngrok.io'
+  ngrokURL = 'https://8904bd88ff76.ngrok.io'
 
   componentDidMount() {
     this.getDBbeers()
@@ -30,6 +35,7 @@ class App extends Component {
     .then(allUserBeers => 
       this.setState({ currentUser: user, userBeers: allUserBeers.filter(ub => ub.user_id === user.id)})
       )
+    // .then(() => navigate('Home'))  
   } 
 
   addToDB = (beer) => {
@@ -61,7 +67,12 @@ class App extends Component {
     const {setUser, addNewBeer, addToDB, getDBbeers, ngrokURL} = this
     return (
       <NavigationContainer> 
-        <Stack.Navigator initialRouteName="LoginSignup">
+        <Stack.Navigator initialRouteName="LoginSignup" screenOptions={{
+        headerTitleAlign: true,
+        headerStyle: {
+          backgroundColor: '#f0ead6'
+        }
+        }}>
 
           <Stack.Screen name="LoginSignup" options={{ title: 'BAC Untappd' }}>
           {props => <LoginSignup {...props} setUser={setUser} ngrokURL={ngrokURL}/>}
@@ -71,12 +82,27 @@ class App extends Component {
           {props => <Search {...props} addNewBeer={addNewBeer} ngrokURL={ngrokURL} dbBeers={dbBeers} addToDB={addToDB} getDBbeers={getDBbeers}/>}
           </Stack.Screen> 
 
-          <Stack.Screen name="Home">
+          <Stack.Screen name="Home" options={({ navigation }) =>
+          ({headerLeft: () => {return null},
+          headerRight: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+              <Image style={styles.gear} source={{uri: "https://www.pngrepo.com/download/266961/settings-gear.png"}}/>
+            </TouchableOpacity>
+            ),
+            })}>
           {props => <Home {...props} userBeers={userBeers} dbBeers={dbBeers} currentUser={currentUser}/>}
           </Stack.Screen> 
 
           <Stack.Screen name="History">
           {props => <History {...props} userBeers={userBeers} dbBeers={dbBeers}/>}
+          </Stack.Screen> 
+
+          <Stack.Screen name="Analytics">
+          {props => <Analytics {...props} userBeers={userBeers} dbBeers={dbBeers}/>}
+          </Stack.Screen> 
+
+          <Stack.Screen name="Settings">
+          {props => <Settings {...props} />}
           </Stack.Screen> 
 
         </Stack.Navigator>
@@ -90,7 +116,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(255,205,0)',
     alignItems: 'center',
     justifyContent: 'center',
-    
+  },
+  gear: {
+    width: 25,
+    height: 25,
+    // backgroundColor: 'rgb(255,205,0)',
   },
 });
 

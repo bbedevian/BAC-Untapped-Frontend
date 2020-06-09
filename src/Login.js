@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 
 class Login extends React.Component {
     state = {
@@ -34,6 +34,7 @@ class Login extends React.Component {
         const {navigation} = this.props
         return (
             <View>
+
                 <Text>Username</Text>
                 <TextInput style={styles.inputField} onChangeText={(text) =>  changeName(text)} value={name}/>
 
@@ -41,8 +42,10 @@ class Login extends React.Component {
                 <TextInput style={styles.inputField} secureTextEntry={true} onChangeText={(text)=>changePassword(text)} value={password}/>
                
                 <TouchableOpacity onPress={() => {handleSubmit(); navigation.navigate('Home') }}>
+                {/* <TouchableOpacity onPress={() => {handleSubmit() }}> */}
                     <Text>Submit</Text>
                 </TouchableOpacity>
+                
             </View>
             );
 
@@ -59,5 +62,10 @@ const styles = StyleSheet.create({
         borderColor: 'gray', 
         borderWidth: 1 
     },
+    image: {
+        flex: 1,
+        resizeMode: "cover",
+        justifyContent: "center"
+      },
    
 })

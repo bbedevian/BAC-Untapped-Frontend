@@ -20,17 +20,18 @@ class LoginSignup extends Component {
     const {login, signup} = this.state
     const {changeLogin, changeSignup} = this
     const {setUser, navigation, ngrokURL} = this.props
-    // console.log('props :>> ', this.props);
         return (
                 <View style={styles.background}>
                 {!login && !signup ? 
                 <View style={styles.background}>
+                    <ImageBackground style={styles.image} source={{uri: "https://i.pinimg.com/originals/db/7f/c2/db7fc263c7ff27035979a51498577d8a.jpg"}}>
                     <TouchableOpacity style={styles.loginButton} onPress={changeLogin}>
                         <Text>Click Here To Login</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.signupButton}onPress={changeSignup}>
                         <Text>Click Here To Sign Up</Text>
-                    </TouchableOpacity>    
+                    </TouchableOpacity>   
+                    </ImageBackground> 
                 </View>
                 : // either log in or sign up based on above click
                 <View>
@@ -49,7 +50,7 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 
 const styles = StyleSheet.create({
     background: {
-        backgroundColor: 'rgb(255,205,0)',
+        // backgroundColor: 'rgb(255,205,0)',
         flex: 1,
         // justifyContent: "flex-end"
     },
@@ -65,6 +66,8 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         borderWidth: 4,
         borderColor: "#20232a",
+        justifyContent: 'center',
+        alignItems: 'center',
 
     },
     signupButton: {
@@ -74,6 +77,13 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         borderWidth: 4,
         borderColor: "#20232a",
-    
-    }
+        justifyContent: 'center',
+        alignItems: 'center',
+
+    },
+    image: {
+        flex: 1,
+        resizeMode: "cover",
+        justifyContent: "center"
+      },
 })
