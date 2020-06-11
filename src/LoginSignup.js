@@ -12,8 +12,8 @@ class LoginSignup extends Component {
         signup: false
     }
 
-    changeLogin = () =>{this.setState({login: true})}
-    changeSignup = () =>{this.setState({signup: true})}
+    changeLogin = () =>{this.setState({login: !this.state.login})}
+    changeSignup = () =>{this.setState({signup: !this.state.signup})}
 
 
     render() {
@@ -35,8 +35,8 @@ class LoginSignup extends Component {
                 </View>
                 : // either log in or sign up based on above click
                 <View>
-                    {login ?  <Login setUser={setUser} navigation={navigation} ngrokURL={ngrokURL}/> : null}
-                    {signup ?  < Signup setUser={setUser} navigation={navigation} ngrokURL={ngrokURL}/> : null}
+                    {login ?  <Login setUser={setUser} navigation={navigation} ngrokURL={ngrokURL} changeLogin={changeLogin}/> : null}
+                    {signup ?  < Signup setUser={setUser} navigation={navigation} ngrokURL={ngrokURL} changeSignup={changeSignup}/> : null}
                 </View>
             }  
             </View>
@@ -50,9 +50,10 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 
 const styles = StyleSheet.create({
     background: {
-        // backgroundColor: 'rgb(255,205,0)',
+        backgroundColor: 'rgb(255,205,0)',
         flex: 1,
-        // justifyContent: "flex-end"
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     welcomeText: {
         position: "absolute",

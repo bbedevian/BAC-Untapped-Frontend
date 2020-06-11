@@ -6,6 +6,7 @@ import Search from './src/Search'
 import History from './src/History'
 import Analytics from './src/Analytics'
 import Settings from './src/Settings'
+import Info from './src/Info'
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -23,7 +24,7 @@ class App extends Component {
     dbBeers: []
   }
 
-  ngrokURL = 'https://8904bd88ff76.ngrok.io'
+  ngrokURL = 'https://c5c3b7f15f84.ngrok.io'
 
   componentDidMount() {
     this.getDBbeers()
@@ -35,7 +36,7 @@ class App extends Component {
     .then(allUserBeers => 
       this.setState({ currentUser: user, userBeers: allUserBeers.filter(ub => ub.user_id === user.id)})
       )
-    // .then(() => navigate('Home'))  
+    // .then(({navigation}) => navigation.navigate('Home'))  
   } 
 
   addToDB = (beer) => {
@@ -90,7 +91,7 @@ class App extends Component {
             </TouchableOpacity>
             ),
             })}>
-          {props => <Home {...props} userBeers={userBeers} dbBeers={dbBeers} currentUser={currentUser}/>}
+          {props => <Home {...props} userBeers={userBeers} dbBeers={dbBeers} currentUser={currentUser} addNewBeer={addNewBeer}/>}
           </Stack.Screen> 
 
           <Stack.Screen name="History">
@@ -102,7 +103,11 @@ class App extends Component {
           </Stack.Screen> 
 
           <Stack.Screen name="Settings">
-          {props => <Settings {...props} />}
+          {props => <Settings {...props} currentUser={currentUser} />}
+          </Stack.Screen> 
+
+          <Stack.Screen name="About BAC">
+          {props => <Info {...props} />}
           </Stack.Screen> 
 
         </Stack.Navigator>

@@ -3,7 +3,6 @@ import { Image, StyleSheet, View, Text, TouchableHighlight, ImageBackground } fr
 
 const BeerCard = (props) => {
     const {beer, selectBeer} = props
-    // console.log('beer card props :>> ', props);
     return (
      beer.beer_label ? 
         <View style={styles.beerBox}>

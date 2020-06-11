@@ -3,45 +3,27 @@ import { StyleSheet, View, Text } from 'react-native';
 
 const HistoryCard = (props) => {
     const {dbBeers, beer} = props
-
+    let logMo = new Date(beer.created_at).getMonth()
+    let logDate = new Date(beer.created_at).getDate()
+    let logYr = new Date(beer.created_at).getYear()
+    let dbBrew = dbBeers.find(dbBeer => dbBeer.id === beer.beer_id)
     return (
             <View>
-                <Text>Name {dbBeers.find(dbBeer => dbBeer.id === beer.beer_id).name}</Text>
-                <Text>Logged on: {beer.created_at}</Text>
+                <Text>Name {dbBrew.name}</Text>
+                <Text>Logged on: {logDate}/{logMo}/{logYr}</Text>
                 <Text>Size {beer.size} ozs</Text>
-                <Text>ABV {dbBeers.find(dbBeer => dbBeer.id === beer.beer_id).abv} %</Text>
+                <Text>ABV {dbBrew.abv} %</Text>
                 <Text></Text>
-            {/* <Text>{beer.name}</Text>
-            <Text>ABV: {beer.abv} %</Text> */}
             </View>
     );
 }
 
 const styles = StyleSheet.create({
-    beerLogo: {
-        width: 100,
-        height: 100,
-        alignSelf: "center",
-        
-    },
-    beerBox: {
-        marginTop: 8,
-        height: "auto",
-        width: 350,
-        paddingVertical: 8,
-        borderWidth: 4,
-        borderColor: "#20232a",
-        borderRadius: 6,
-        backgroundColor: '#fff',
-    },
-    textRight: {
-        fontSize: 20,
-        alignSelf: "center",
-    },
-    background: {
-        width: 350,
-        height: "auto" 
-    },
+   card: {
+       borderBottomColor: 'black',
+       borderBottomWidth: 350
+
+   }
 
 })
 

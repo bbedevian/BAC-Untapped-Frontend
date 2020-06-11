@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import {LineChart} from "react-native-chart-kit";
+import QuickLog from './QuickLog';
 
 let today = new Date();
 
@@ -16,9 +17,9 @@ bac = (oz, abv, hours) => {
 calcHours = (beer) => {
    return (today.getTime() - beer.time)/3600000
 }
-    
+
 render() {
-    const {currentUser, dbBeers, userBeers} = this.props
+    const {currentUser, dbBeers, userBeers, addNewBeer} = this.props
     let bacLog = []
     let beerLog = []
         if (currentUser) {
@@ -26,6 +27,9 @@ render() {
             weight = currentUser.weight
             beerLog = userBeers.map(uBeer => {
                 return {
+                    name: (dbBeers.find(dbBeer => dbBeer.id === uBeer.beer_id).name),
+                    img: (dbBeers.find(dbBeer => dbBeer.id === uBeer.beer_id).img_url),
+                    id: (dbBeers.find(dbBeer => dbBeer.id === uBeer.beer_id).id),
                     size: uBeer.size,
                     time: new Date(uBeer.created_at).getTime(),
                     abv: (dbBeers.find(dbBeer => dbBeer.id === uBeer.beer_id).abv)
@@ -48,6 +52,7 @@ render() {
     let chartData = bacLog.map(beer => {
         return total+=beer 
     })
+    // if (total > .2) {alert("You should probably just grab and uber n go home")}
 
     let calories = 0
     beerLog.forEach(beer => calories += (beer.size*beer.abv*2.5))
@@ -56,7 +61,9 @@ render() {
     let soberHour = (today.getHours() + Math.round(TTS))
     if (soberHour > 24) {soberHour = soberHour-24} // converts to the next day
     
-    chartLabels.push(soberHour+":"+today.getMinutes())
+    if (today.getMinutes() < 10) {chartLabels.push(soberHour+":0"+today.getMinutes())}
+    else {chartLabels.push(soberHour+":"+today.getMinutes())}
+
     let firstLabel = (chartLabels[0].split(":")[0]-1)+":"+chartLabels[0].split(":")[1]
     // chartLabels.unshift(firstLabel)
     chartData.push(0)
@@ -65,6 +72,7 @@ render() {
     let bgcolor = "#00ff00"
     if (total > .08) {bgcolor = "#ffff00"}
     if (total > .15) {bgcolor = "#ff3300"}
+    let dotColor = chartData[-1] ? 'white' : bgcolor
 
     return (
         <>
@@ -74,6 +82,7 @@ render() {
         <Text> {calories} calories from beer</Text>
         </View>
         {bacLog.length > 0 ? 
+        <>
         <View style={styles.graph}>
             <LineChart
             data={{
@@ -103,11 +112,16 @@ render() {
             propsForDots: {
                 r: "6",
                 strokeWidth: "2",
-                stroke: bgcolor
+                stroke: dotColor
             }
             }}
         />
         </View> 
+        <View style={styles.quickLog}>
+        <QuickLog beer={beerLog[beerLog.length-1]} addNewBeer={addNewBeer}/>
+        {beerLog.length >= 2 && beerLog[beerLog.length-2].name !== beerLog[beerLog.length-1]? <QuickLog beer={beerLog[beerLog.length-2]} addNewBeer={addNewBeer}/> : null}
+        </View>
+        </>
         // dont show graph when loading
         : null}
         </>
@@ -125,12 +139,20 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         borderWidth: 4,
         borderColor: "#20232a",
-        borderRadius: 6,
         backgroundColor: '#fff',
+        paddingLeft: 5
     },
     graph: {
-        marginTop: 25,
+        flex: 3,
+        marginTop: 10,
         borderColor: 'black',
         borderWidth: 1
-    }
+    },
+    quickLog: {
+        flex: 1,
+        top: 25,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
+  
 })

@@ -26,12 +26,14 @@ class Login extends React.Component {
        } else {
             alert("Seems like we cant find you, try creating an account")
            }   
+        this.setState({name: ''})
+        this.props.changeLogin()   
     }
 
     render() {
         const {name, password} = this.state
         const {changeName, changePassword, handleSubmit} = this
-        const {navigation} = this.props
+        const {navigation, changeLogin} = this.props
         return (
             <View>
 
@@ -42,8 +44,11 @@ class Login extends React.Component {
                 <TextInput style={styles.inputField} secureTextEntry={true} onChangeText={(text)=>changePassword(text)} value={password}/>
                
                 <TouchableOpacity onPress={() => {handleSubmit(); navigation.navigate('Home') }}>
-                {/* <TouchableOpacity onPress={() => {handleSubmit() }}> */}
                     <Text>Submit</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => changeLogin()}>
+                    <Text>Sign Up Instead</Text>
                 </TouchableOpacity>
                 
             </View>

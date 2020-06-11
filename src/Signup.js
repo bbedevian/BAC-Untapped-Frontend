@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TextInput, StyleSheet, Button } from 'react-native';
+import { Text, View, TextInput, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import RadioForm from 'react-native-simple-radio-button';
 
 const initialState = {name: null, weight: null, male: null, password: null}
@@ -29,13 +29,14 @@ class Signup extends React.Component {
             .then(response => response.json())
             .then(newUser => this.props.setUser(newUser))
             .then(this.setState(initialState))
+            .then(this.props.changeSignup())
        } catch(e) {console.log(e)}
     }
 
     render() {
         const {name, weight, password} = this.state
         const {changeName, changePassword, changeWeight, createNewUser} = this
-        const {navigation} = this.props
+        const {navigation, changeSignup} = this.props
 
         const radio_props = [
             {label: 'Male', value: true },
@@ -59,6 +60,10 @@ class Signup extends React.Component {
             <RadioForm radio_props={radio_props} initial={null} onPress={(value) => {this.setState({male:value})}} />
 
             <Button title="submit" onPress={() => {createNewUser(); navigation.navigate('Home')}}/>
+
+            <TouchableOpacity onPress={() => changeSignup()}>
+                    <Text>Sign Up Instead</Text>
+            </TouchableOpacity>
 
         </View>
         );

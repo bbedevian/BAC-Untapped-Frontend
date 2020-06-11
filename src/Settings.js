@@ -4,7 +4,13 @@ import { Text, View, Button, StyleSheet, TouchableOpacity, ImageBackground} from
 const Settings = (props) => {
 console.log('props.currentUser :>> ', props.currentUser);
     return (
-        <View></View>
+        <View>
+
+            
+
+            <Button title="Sign Out" onPress={() => props.navigation.navigate('LoginSignup')}/>
+
+        </View>
     );
 }
 
