@@ -26,7 +26,6 @@ class Signup extends React.Component {
             },
             body: JSON.stringify(newUser)
             })
-            .then(response => response.json())
             .then(newUser => this.props.setUser(newUser))
             .then(this.setState(initialState))
             .then(this.props.changeSignup())

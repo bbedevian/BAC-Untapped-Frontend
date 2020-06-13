@@ -2,17 +2,18 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
 const HistoryCard = (props) => {
-    const {dbBeers, beer} = props
-    let logMo = new Date(beer.created_at).getMonth()
-    let logDate = new Date(beer.created_at).getDate()
-    let logYr = new Date(beer.created_at).getYear()
-    let dbBrew = dbBeers.find(dbBeer => dbBeer.id === beer.beer_id)
+    const {beer} = props
+    let logMo = beer.time.getMonth()
+    let logDate = beer.time.getDate()
+    let logYr = beer.time.getYear()
+    let calories = (beer.abv*2.5*beer.size)
     return (
             <View>
-                <Text>Name {dbBrew.name}</Text>
+                <Text>Name: {beer.name}</Text>
                 <Text>Logged on: {logDate}/{logMo}/{logYr}</Text>
-                <Text>Size {beer.size} ozs</Text>
-                <Text>ABV {dbBrew.abv} %</Text>
+                <Text>Size: {beer.size} ozs</Text>
+                <Text>ABV: {beer.abv} %</Text>
+                <Text>Calories: {calories}</Text>
                 <Text></Text>
             </View>
     );

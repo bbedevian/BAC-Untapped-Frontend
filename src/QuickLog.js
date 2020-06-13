@@ -8,7 +8,8 @@ const QuickLog = (props) => {
         <View style={styles.beerBox}>
             <TouchableOpacity onPress={() => addNewBeer(beer, beer.size)} >
             <Image style={styles.beerLogo} source={{uri: `${beer.img}`}} />
-            <Text style={styles.textRight}>ABV: {beer.abv} %</Text>
+            <Text>Quick Log</Text>
+            {/* <Text style={styles.textRight}>ABV: {beer.abv} %</Text> */}
             </TouchableOpacity>
         </View>
     );

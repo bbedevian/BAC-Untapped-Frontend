@@ -15,10 +15,14 @@ class Home extends Component {
                 
                  <View style={styles.actionViews}>
                     <TouchableHighlight style={styles.actionBox} onPress={() => navigation.navigate('Analytics')} >
-                        <Text>View Analytics</Text>
+                        <Text> <Image style={styles.actionImage}
+                        source={{uri: 'https://www.freeiconspng.com/uploads/analytic-icon-10.png'}}/>
+                        {"\n"} Analytics</Text>
                     </TouchableHighlight>
                     <TouchableNativeFeedback style={styles.actionBox} onPress={() => navigation.navigate('History')} >
-                        <Text>View Your Log History</Text>
+                        <Text> <Image style={styles.actionImage}
+                        source={{uri: "https://i.ya-webdesign.com/images/png-file-in-notepad-4.png"}}/>
+                               Log History</Text>
                     </TouchableNativeFeedback>
                  </View>
                     <Button title="Log a new beer" onPress={() => this.props.navigation.navigate('Search')}/>
@@ -41,8 +45,7 @@ export default Home;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        // justifyContent: 'center',
+        flexDirection: 'column',
         backgroundColor: 'rgb(255,205,0)',
         
       },
@@ -59,17 +62,23 @@ const styles = StyleSheet.create({
         flex: 1,
         top: 35,
         flexDirection: 'row',
-        // justifyContent: 'space-evenly',
+        justifyContent: 'space-evenly',
         
     },
     actionBox: {
-        width: "auto",
-        padding: 12,
-        paddingVertical: 4,
+        flex: 1,
+        flexDirection: 'column',
+        // padding: 12,
+        // paddingVertical: 4,
         borderWidth: 4,
         borderColor: "#20232a",
         borderRadius: 6,
         backgroundColor: '#fff',
+        // justifyContent: 'center'
+    },
+    actionImage: {
+        width: 20,
+        height: 20
     }
      
 })

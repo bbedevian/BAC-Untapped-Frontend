@@ -22,11 +22,10 @@ const Analytics = (props) => {
     
     return (
 
-    <View>
-        <Text>Analytics Page</Text>
-    <Text> Youve logged {total} beers since {firstBeerMo}/{firstBeerDay}/{firstBeerYr}</Text>
-    <Text>You average {bpd} drinks per day</Text>
-    <Text>These beers have an average ABV of {averageABV}% </Text>
+    <View style={styles.container}>
+    <Text style={styles.text}>Youve logged {total} beers since {firstBeerMo}/{firstBeerDay}/{firstBeerYr}</Text>
+    <Text style={styles.text}>You average {bpd} drinks per day</Text>
+    <Text style={styles.text}>These beers have an average ABV of {averageABV}% </Text>
     </View>    
     );
     } else {
@@ -39,3 +38,16 @@ const Analytics = (props) => {
 }
 
 export default Analytics;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: 'rgb(255,205,0)',
+        justifyContent: 'space-evenly',
+    },
+    text: {
+        fontSize: 25,
+        left: 5
+    }
+})

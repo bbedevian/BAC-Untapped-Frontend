@@ -59,7 +59,7 @@ render() {
     
     let TTS = ((total/.016)) //gives you hours until sober
     let soberHour = (today.getHours() + Math.round(TTS))
-    if (soberHour > 24) {soberHour = soberHour-24} // converts to the next day
+    if (soberHour >= 24) {soberHour = soberHour-24} // converts to the next day
     
     if (today.getMinutes() < 10) {chartLabels.push(soberHour+":0"+today.getMinutes())}
     else {chartLabels.push(soberHour+":"+today.getMinutes())}
@@ -117,6 +117,7 @@ render() {
             }}
         />
         </View> 
+
         <View style={styles.quickLog}>
         <QuickLog beer={beerLog[beerLog.length-1]} addNewBeer={addNewBeer}/>
         {beerLog.length >= 2 && beerLog[beerLog.length-2].name !== beerLog[beerLog.length-1]? <QuickLog beer={beerLog[beerLog.length-2]} addNewBeer={addNewBeer}/> : null}

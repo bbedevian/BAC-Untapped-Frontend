@@ -4,6 +4,7 @@ import CardContainer from './CardContainer'
 import { CLIENT_ID, CLIENT_SECRET } from 'react-native-dotenv'
 import BeerCard from './BeerCard';
 import Serving from './Serving';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 
 class Search extends React.Component {
     
@@ -61,7 +62,10 @@ class Search extends React.Component {
                 <View>
                     <BeerCard beer={selectedBeer}/>
                     <Serving selectServing={selectServing}/>
-                    <Button title={'Log It!'} onPress={() => {addNewBeer(selectedBeer, servingSize); navigation.navigate('Home')}}/>
+                    <Button title={'Log It!'} onPress={() => {addNewBeer(selectedBeer, servingSize); this.props.getDBbeers(); navigation.navigate('Home')}}/>
+                    <TouchableHighlight onPress={() => this.setState({beersArray: [], selectedBeer: {}})}>
+                      <Text>Wrong Beer? Go back and select another!</Text>
+                    </TouchableHighlight>
                 </View>
                 : // if beers searched for but not selected..
                 <CardContainer beers={beersArray} selectBeer={selectBeer}/>
