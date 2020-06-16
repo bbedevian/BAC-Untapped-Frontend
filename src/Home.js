@@ -15,14 +15,10 @@ class Home extends Component {
                 
                  <View style={styles.actionViews}>
                     <TouchableHighlight style={styles.actionBox} onPress={() => navigation.navigate('Analytics')} >
-                        <Text> <Image style={styles.actionImage}
-                        source={{uri: 'https://www.freeiconspng.com/uploads/analytic-icon-10.png'}}/>
-                        {"\n"} Analytics</Text>
+                        <Text style={styles.actionText}>📊Analytics</Text>
                     </TouchableHighlight>
                     <TouchableNativeFeedback style={styles.actionBox} onPress={() => navigation.navigate('History')} >
-                        <Text> <Image style={styles.actionImage}
-                        source={{uri: "https://i.ya-webdesign.com/images/png-file-in-notepad-4.png"}}/>
-                               Log History</Text>
+                        <Text style={styles.actionText}>🗒Log History</Text>
                     </TouchableNativeFeedback>
                  </View>
                     <Button title="Log a new beer" onPress={() => this.props.navigation.navigate('Search')}/>
@@ -61,24 +57,28 @@ const styles = StyleSheet.create({
       actionViews: {
         flex: 1,
         top: 35,
+        // height: "auto",
+        // width: "auto",
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         
     },
     actionBox: {
-        flex: 1,
-        flexDirection: 'column',
-        // padding: 12,
+        height: 45,
+        padding: 5,
         // paddingVertical: 4,
         borderWidth: 4,
         borderColor: "#20232a",
         borderRadius: 6,
         backgroundColor: '#fff',
-        // justifyContent: 'center'
+        justifyContent: 'center'
     },
     actionImage: {
         width: 20,
         height: 20
+    },
+    actionText: {
+        fontSize: 20
     }
      
 })

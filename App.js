@@ -24,7 +24,7 @@ class App extends Component {
     dbBeers: []
   }
 
-  ngrokURL = 'https://181ec4ba31bf.ngrok.io'
+  ngrokURL = 'https://9ca52da29e63.ngrok.io'
 
   componentDidMount() {
     this.getDBbeers()

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Dimensions, ImageBackground} from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Dimensions, ImageBackground, Image} from 'react-native';
 import Login from './Login';
 import Signup from './Signup';
 
@@ -25,6 +25,7 @@ class LoginSignup extends Component {
                 {!login && !signup ? 
                 <View style={styles.background}>
                     <ImageBackground style={styles.image} source={{uri: "https://i.pinimg.com/originals/db/7f/c2/db7fc263c7ff27035979a51498577d8a.jpg"}}>
+                    <Image source={{uri: 'https://i.ibb.co/3WjP3rg/Untitled-4.png'}} style={styles.logo}/>
                     <TouchableOpacity style={styles.loginButton} onPress={changeLogin}>
                         <Text>Click Here To Login</Text>
                     </TouchableOpacity>
@@ -69,6 +70,7 @@ const styles = StyleSheet.create({
         borderColor: "#20232a",
         justifyContent: 'center',
         alignItems: 'center',
+        top: 70
 
     },
     signupButton: {
@@ -80,6 +82,7 @@ const styles = StyleSheet.create({
         borderColor: "#20232a",
         justifyContent: 'center',
         alignItems: 'center',
+        top: 70
 
     },
     image: {
@@ -87,4 +90,12 @@ const styles = StyleSheet.create({
         resizeMode: "cover",
         justifyContent: "center"
       },
+      logo: {
+          height: 300,
+          resizeMode: 'contain',
+          top: 60
+        //   alignContent: 'center'
+        //   zIndex: 20,
+        //   justifyContent: "center"
+      }
 })

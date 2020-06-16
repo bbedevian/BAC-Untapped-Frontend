@@ -8,7 +8,7 @@ const HistoryCard = (props) => {
     let logYr = beer.time.getYear()
     let calories = (beer.abv*2.5*beer.size)
     return (
-            <View>
+            <View style={styles.card}>
                 <Text>Name: {beer.name}</Text>
                 <Text>Logged on: {logDate}/{logMo}/{logYr}</Text>
                 <Text>Size: {beer.size} ozs</Text>
@@ -22,8 +22,7 @@ const HistoryCard = (props) => {
 const styles = StyleSheet.create({
    card: {
        borderBottomColor: 'black',
-       borderBottomWidth: 350
-
+       borderBottomWidth: 1
    }
 
 })
