@@ -7,9 +7,9 @@ const QuickLog = (props) => {
     return (
         <View style={styles.beerBox}>
             <TouchableOpacity onPress={() => addNewBeer(beer, beer.size)} >
-            <Image style={styles.beerLogo} source={{uri: `${beer.img}`}} />
             <Text>Quick Log</Text>
-            {/* <Text style={styles.textRight}>ABV: {beer.abv} %</Text> */}
+            <Image style={styles.beerLogo} source={{uri: `${beer.img}`}} />
+            <Text> {beer.size} oz/ {beer.abv} %</Text>
             </TouchableOpacity>
         </View>
     );
@@ -22,23 +22,22 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         alignSelf: "center",
-        
     },
     beerBox: {
         height: "auto",
-        width: "auto",
-        padding: 12,
-        paddingVertical: 4,
+        width: 100,
+        // padding: 12,
+        // paddingVertical: 4,
         borderWidth: 4,
         borderColor: "#20232a",
         borderRadius: 6,
         backgroundColor: '#fff',
+        justifyContent: 'center',
+        alignItems: 'center'
        
     },
     textRight: {
         fontSize: 15,
         alignSelf: "center",
     },
-  
-
 })

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, Image, Button } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 import LoginSignup from './src/LoginSignup';
 import Home from './src/Home'
 import Search from './src/Search'
@@ -13,7 +13,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
-
 const Stack = createStackNavigator();
 
 class App extends Component {
@@ -24,20 +23,21 @@ class App extends Component {
     dbBeers: []
   }
 
-  ngrokURL = 'https://9ca52da29e63.ngrok.io'
+  ngrokURL = 'https://4e4915eacdb6.ngrok.io'
 
-  componentDidMount() {
-    this.getDBbeers()
-  }
+  componentDidMount() { this.getDBbeers() }
 
   setUser = (user) => 
   {fetch(`${this.ngrokURL}/user_beers`)
     .then(response => response.json())
     .then(allUserBeers => 
       this.setState({ currentUser: user, userBeers: allUserBeers.filter(ub => ub.user_id === user.id)})
-      )
-    // .then(({navigation}) => navigation.navigate('Home'))  
+      )  
   } 
+
+  removeBeer = (beer) => {
+    this.setState({userBeers: this.state.userBeers.filter(ub => ub.id !== beer.id)})
+  }
 
   addToDB = (beer) => {
     this.setState({dbBeers: [...this.state.dbBeers, beer]})
@@ -65,7 +65,7 @@ class App extends Component {
 
   render () {
     const {dbBeers, userBeers, currentUser} = this.state
-    const {setUser, addNewBeer, addToDB, getDBbeers, ngrokURL} = this
+    const {setUser, addNewBeer, addToDB, getDBbeers, ngrokURL, removeBeer} = this
     return (
       <NavigationContainer> 
         <Stack.Navigator initialRouteName="LoginSignup" screenOptions={{
@@ -79,7 +79,7 @@ class App extends Component {
           {props => <LoginSignup {...props} setUser={setUser} ngrokURL={ngrokURL}/>}
           </Stack.Screen> 
 
-          <Stack.Screen name="Search">
+          <Stack.Screen name="Log a new Beer">
           {props => <Search {...props} addNewBeer={addNewBeer} ngrokURL={ngrokURL} dbBeers={dbBeers} addToDB={addToDB} getDBbeers={getDBbeers}/>}
           </Stack.Screen> 
 
@@ -95,7 +95,7 @@ class App extends Component {
           </Stack.Screen> 
 
           <Stack.Screen name="History">
-          {props => <History {...props} userBeers={userBeers} dbBeers={dbBeers}/>}
+          {props => <History {...props} userBeers={userBeers} dbBeers={dbBeers} ngrokURL={ngrokURL} removeBeer={removeBeer}/>}
           </Stack.Screen> 
 
           <Stack.Screen name="Analytics">
@@ -125,7 +125,6 @@ const styles = StyleSheet.create({
   gear: {
     width: 25,
     height: 25,
-    // backgroundColor: 'rgb(255,205,0)',
   },
 });
 

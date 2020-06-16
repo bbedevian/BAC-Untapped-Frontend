@@ -2,16 +2,26 @@ import React from 'react';
 import {ScrollView, View, Text } from 'react-native';
 import HistoryCard from './HistoryCard';
 import DropDownPicker from 'react-native-dropdown-picker';
+import EditLog from './EditLog';
 
 
 class History extends React.Component {
 
 state = {
-    filter: ''
+    filter: 'NF',
 }
+
+deletePost = (beer) => {
+    fetch(`${this.props.ngrokURL}/user_beers/${beer.id}`, {
+     method: 'DELETE'
+     })
+     this.props.removeBeer(beer)
+ }
+
 render () {
-const {userBeers, dbBeers} = this.props
-const {filter} = this.state
+const {userBeers, dbBeers, ngrokURL, removeBeer} = this.props
+const {filter, edit, editBeer} = this.state
+const {editLog, deletePost} = this
 
 let history = userBeers.map(uBeer => {
     return {
@@ -28,6 +38,7 @@ if (filter === 'HF') {history.sort((a,b) => (a.abv < b.abv) ? 1 : -1)}
 if (filter === 'LF') {history.sort((a,b) => (a.abv > b.abv) ? 1 : -1)}    
 
 return (
+    !edit ? 
     <View>
     <DropDownPicker
     items={[
@@ -43,9 +54,11 @@ return (
 />
     <Text></Text>    
     <ScrollView>
-        {history.map(uBeer => <HistoryCard key={uBeer.id} beer={uBeer}/>)}
+        {history.map(uBeer => <HistoryCard key={uBeer.id} beer={uBeer} deletePost={deletePost}/>)}
     </ScrollView>
     </View>
+    :
+    <EditLog ngrokURL={ngrokURL}beer={editBeer} removeBeer={removeBeer}/>
 );
 }
 }

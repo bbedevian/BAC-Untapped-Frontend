@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, Dimensions, Image } from 'react-native';
 import {LineChart} from "react-native-chart-kit";
 import QuickLog from './QuickLog';
 
@@ -49,10 +49,8 @@ render() {
        return `${hours}:${minutes}`
     })
     let total = 0
-    let chartData = bacLog.map(beer => {
-        return total+=beer 
-    })
-    // if (total > .2) {alert("You should probably just grab and uber n go home")}
+    let chartData = bacLog.map(beer => {return total+=beer})
+    if (total > .2) {alert("You should probably just grab and uber n go home")}
 
     let calories = 0
     beerLog.forEach(beer => calories += (beer.size*beer.abv*2.5))
@@ -64,7 +62,7 @@ render() {
     if (today.getMinutes() < 10) {chartLabels.push(soberHour+":0"+today.getMinutes())}
     else {chartLabels.push(soberHour+":"+today.getMinutes())}
 
-    let firstLabel = (chartLabels[0].split(":")[0]-1)+":"+chartLabels[0].split(":")[1]
+    // let firstLabel = (chartLabels[0].split(":")[0]-1)+":"+chartLabels[0].split(":")[1]
     // chartLabels.unshift(firstLabel)
     chartData.push(0)
     // chartData.unshift(0)
@@ -87,11 +85,7 @@ render() {
             <LineChart
             data={{
             labels: chartLabels,
-            datasets: [
-                {
-                data: chartData
-                }
-            ]
+            datasets: [{data: chartData}]
             }}
             width={Dimensions.get("window").width} // from react-native
             height={300}
@@ -107,7 +101,7 @@ render() {
             color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
             labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
             style: {
-                borderRadius: 8
+                borderRadius: 8,
             },
             propsForDots: {
                 r: "6",
@@ -120,13 +114,14 @@ render() {
 
         <View style={styles.quickLog}>
         <QuickLog beer={beerLog[beerLog.length-1]} addNewBeer={addNewBeer}/>
-        {beerLog.length >= 2 && beerLog[beerLog.length-2].name !== beerLog[beerLog.length-1]? <QuickLog beer={beerLog[beerLog.length-2]} addNewBeer={addNewBeer}/> : null}
+        {beerLog.length >= 2 ? <QuickLog beer={beerLog[beerLog.length-2]} addNewBeer={addNewBeer}/> : null}
+        {beerLog.length >= 3 ? <QuickLog beer={beerLog[beerLog.length-3]} addNewBeer={addNewBeer}/> : null}
         </View>
         </>
         // dont show graph when loading
         : <View style={styles.soberBox}>
-            <Text style={styles.soberText}>Your BAC is currently 0</Text>
-            <Text style={styles.soberText}>Log a beer once youve finished to begin tracking.</Text>
+            <Text style={styles.soberText}>Log a beer once youve finished drinking it to begin tracking.</Text>
+            <Image style={styles.beergif} source={{uri: 'https://media.giphy.com/media/WodWN12m0ACQp7uaAW/giphy.gif'}}/>
         </View>  }
         </>
     )
@@ -149,8 +144,6 @@ const styles = StyleSheet.create({
     graph: {
         flex: 3,
         marginTop: 10,
-        borderColor: 'black',
-        borderWidth: 1
     },
     quickLog: {
         flex: 1,
@@ -159,10 +152,15 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
     },
     soberText: {
-        fontSize: 25
+        fontSize: 25,
+        textAlign: 'center'
     },
     soberBox: {
         
+    },
+    beergif: {
+        height: 300,
+          resizeMode: 'contain',
     }
   
 })

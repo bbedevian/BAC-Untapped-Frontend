@@ -23,9 +23,12 @@ const Analytics = (props) => {
     return (
 
     <View style={styles.container}>
-    <Text style={styles.text}>Youve logged {total} beers since {firstBeerMo}/{firstBeerDay}/{firstBeerYr}</Text>
-    <Text style={styles.text}>You average {bpd} drinks per day</Text>
-    <Text style={styles.text}>These beers have an average ABV of {averageABV}% </Text>
+    <Text style={styles.text}>Beers logged since {firstBeerMo}/{firstBeerDay}/{firstBeerYr}</Text>
+    <Text style={styles.bigFont}>{total}</Text>
+    <Text style={styles.text}>You average drinks per day:</Text>
+    <Text style={styles.bigFont}>{bpd} </Text>
+    <Text style={styles.text}>Average ABV</Text>
+    <Text style={styles.bigFont}>{averageABV}%</Text>
     </View>    
     );
     } else {
@@ -44,10 +47,14 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         backgroundColor: 'rgb(255,205,0)',
-        justifyContent: 'space-evenly',
+        justifyContent: 'center',
     },
     text: {
         fontSize: 25,
-        left: 5
+        textAlign: 'center'
+    },
+    bigFont: {
+        fontSize: 45,
+        textAlign: 'center'
     }
 })
