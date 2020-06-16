@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, Image, Button } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 import LoginSignup from './src/LoginSignup';
 import Home from './src/Home'
 import Search from './src/Search'
@@ -13,7 +13,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
-
 const Stack = createStackNavigator();
 
 class App extends Component {
@@ -24,19 +23,16 @@ class App extends Component {
     dbBeers: []
   }
 
-  ngrokURL = 'https://9ca52da29e63.ngrok.io'
+  ngrokURL = 'https://4e4915eacdb6.ngrok.io'
 
-  componentDidMount() {
-    this.getDBbeers()
-  }
+  componentDidMount() { this.getDBbeers() }
 
   setUser = (user) => 
   {fetch(`${this.ngrokURL}/user_beers`)
     .then(response => response.json())
     .then(allUserBeers => 
       this.setState({ currentUser: user, userBeers: allUserBeers.filter(ub => ub.user_id === user.id)})
-      )
-    // .then(({navigation}) => navigation.navigate('Home'))  
+      )  
   } 
 
   addToDB = (beer) => {
@@ -125,7 +121,6 @@ const styles = StyleSheet.create({
   gear: {
     width: 25,
     height: 25,
-    // backgroundColor: 'rgb(255,205,0)',
   },
 });
 

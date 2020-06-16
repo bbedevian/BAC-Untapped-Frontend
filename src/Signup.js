@@ -7,7 +7,6 @@ const initialState = {name: null, weight: null, male: null, password: null}
 class Signup extends React.Component {
     state = initialState
 
-
     //this should be refactored
     changeName = (text) => this.setState({name: text })
     changeWeight = (text) => this.setState({weight: text })
@@ -38,12 +37,12 @@ class Signup extends React.Component {
     render() {
         const {name, weight, password} = this.state
         const {changeName, changePassword, changeWeight, createNewUser} = this
-        const {navigation, changeSignup} = this.props
+        const {changeSignup} = this.props
 
         const radio_props = [
             {label: 'Male', value: true },
             {label: 'Female', value: false },
-            {label: 'Neutral', value: false } // would like to make this a hybrid but need to change backend too
+            // {label: 'Other', value: false } // would like to make this a hybrid but need to change backend too
           ];
         return (
             <View>
@@ -58,7 +57,7 @@ class Signup extends React.Component {
             <Text>Weight</Text>
             <TextInput keyboardType={'numeric'} style={styles.inputField} onChangeText={(text) =>  changeWeight(text)} value={weight}/>
 
-            <Text>Gender</Text>
+            <Text>Biological sex</Text>
             <RadioForm radio_props={radio_props} initial={null} onPress={(value) => {this.setState({male:value})}} />
 
             <Button title="submit" onPress={() => createNewUser()}/>

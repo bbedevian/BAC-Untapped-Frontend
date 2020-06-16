@@ -16,7 +16,6 @@ class Login extends React.Component {
     }
 
     changeName = (text) => this.setState({name: text })
-
     changePassword = (text) => this.setState({password: text })
 
     handleSubmit = () => {
@@ -38,7 +37,7 @@ class Login extends React.Component {
     render() {
         const {name, password} = this.state
         const {changeName, changePassword, handleSubmit} = this
-        const {navigation, changeLogin} = this.props
+        const {changeLogin} = this.props
         return (
             <View>
 

@@ -5,6 +5,7 @@ const Settings = (props) => {
 console.log('props.currentUser :>> ', props.currentUser);
     return (
         <View>
+            <Text>{props.currentUser.name}</Text>
 
             
 

@@ -14,11 +14,11 @@ const CardContainer = (props) => {
 
 export default CardContainer;
 
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: 'rgb(255,205,0)',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  });
+// const styles = StyleSheet.create({
+//     container: {
+//       flex: 1,
+//       backgroundColor: 'rgb(255,205,0)',
+//       alignItems: 'center',
+//       justifyContent: 'center',
+//     },
+//   });

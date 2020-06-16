@@ -2,16 +2,25 @@ import React from 'react';
 import {ScrollView, View, Text } from 'react-native';
 import HistoryCard from './HistoryCard';
 import DropDownPicker from 'react-native-dropdown-picker';
+import EditLog from './EditLog';
 
 
 class History extends React.Component {
 
 state = {
-    filter: ''
+    filter: '',
+    edit: false,
+    editBeer: {}
 }
+
+editLog = (beer) => {
+    this.setState({edit: true, editBeer: beer})
+}
+
 render () {
 const {userBeers, dbBeers} = this.props
-const {filter} = this.state
+const {filter, edit, editBeer} = this.state
+const {editLog} = this
 
 let history = userBeers.map(uBeer => {
     return {
@@ -28,6 +37,7 @@ if (filter === 'HF') {history.sort((a,b) => (a.abv < b.abv) ? 1 : -1)}
 if (filter === 'LF') {history.sort((a,b) => (a.abv > b.abv) ? 1 : -1)}    
 
 return (
+    !edit ? 
     <View>
     <DropDownPicker
     items={[
@@ -43,9 +53,11 @@ return (
 />
     <Text></Text>    
     <ScrollView>
-        {history.map(uBeer => <HistoryCard key={uBeer.id} beer={uBeer}/>)}
+        {history.map(uBeer => <HistoryCard key={uBeer.id} beer={uBeer} editLog={editLog}/>)}
     </ScrollView>
     </View>
+    :
+    <EditLog beer={editBeer}/>
 );
 }
 }

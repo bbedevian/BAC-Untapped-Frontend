@@ -94,8 +94,5 @@ const styles = StyleSheet.create({
           height: 300,
           resizeMode: 'contain',
           top: 60
-        //   alignContent: 'center'
-        //   zIndex: 20,
-        //   justifyContent: "center"
       }
 })

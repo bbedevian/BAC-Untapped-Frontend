@@ -1,19 +1,24 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 
 const HistoryCard = (props) => {
-    const {beer} = props
+    const {beer, editLog} = props
     let logMo = beer.time.getMonth()
     let logDate = beer.time.getDate()
     let logYr = beer.time.getYear()
     let calories = (beer.abv*2.5*beer.size)
     return (
             <View style={styles.card}>
+                <Text></Text>
                 <Text>Name: {beer.name}</Text>
                 <Text>Logged on: {logDate}/{logMo}/{logYr}</Text>
                 <Text>Size: {beer.size} ozs</Text>
                 <Text>ABV: {beer.abv} %</Text>
                 <Text>Calories: {calories}</Text>
+                <TouchableHighlight onPress={() => editLog(beer)}>
+                    <Text>✏️</Text>
+                </TouchableHighlight>
                 <Text></Text>
             </View>
     );
