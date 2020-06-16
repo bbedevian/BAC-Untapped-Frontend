@@ -124,7 +124,10 @@ render() {
         </View>
         </>
         // dont show graph when loading
-        : null}
+        : <View style={styles.soberBox}>
+            <Text style={styles.soberText}>Your BAC is currently 0</Text>
+            <Text style={styles.soberText}>Log a beer once youve finished to begin tracking.</Text>
+        </View>  }
         </>
     )
         }
@@ -155,5 +158,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
     },
+    soberText: {
+        fontSize: 25
+    },
+    soberBox: {
+        
+    }
   
 })

@@ -22,12 +22,17 @@ class Login extends React.Component {
     handleSubmit = () => {
        let user = this.state.users.find(user => user.name.toLowerCase() === this.state.name.toLowerCase())
        if (user) {
-        this.props.setUser(user)
+           if (user.password === this.state.password) {
+            this.props.setUser(user)
+            this.setState({name: ''})
+            this.props.changeLogin()  
+            this.props.navigation.navigate('Home')
+           } else {alert("Username or password is incorrect")}
+        
        } else {
             alert("Seems like we cant find you, try creating an account")
            }   
-        this.setState({name: ''})
-        this.props.changeLogin()   
+         
     }
 
     render() {
@@ -43,7 +48,7 @@ class Login extends React.Component {
                 <Text>Password</Text>
                 <TextInput style={styles.inputField} secureTextEntry={true} onChangeText={(text)=>changePassword(text)} value={password}/>
                
-                <TouchableOpacity onPress={() => {handleSubmit(); navigation.navigate('Home') }}>
+                <TouchableOpacity onPress={() => {handleSubmit()}}>
                     <Text>Submit</Text>
                 </TouchableOpacity>
 

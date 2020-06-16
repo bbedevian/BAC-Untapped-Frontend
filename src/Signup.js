@@ -13,12 +13,11 @@ class Signup extends React.Component {
     changeWeight = (text) => this.setState({weight: text })
     changePassword = (text) => this.setState({password: text })
 
-   createNewUser = async () => {
-       try {
+   createNewUser = () => {
         let url = this.props.ngrokURL   
         let  newUser = {name: this.state.name, weight: this.state.weight, 
             password: this.state.password, male: this.state.male}
-         await fetch(`${url}/users`, {
+        fetch(`${url}/users`, {
             method: 'POST',
             headers: {
                 'accept': 'application/json',
@@ -26,10 +25,14 @@ class Signup extends React.Component {
             },
             body: JSON.stringify(newUser)
             })
-            .then(newUser => this.props.setUser(newUser))
-            .then(this.setState(initialState))
-            .then(this.props.changeSignup())
-       } catch(e) {console.log(e)}
+            .then(resp => {
+              if (resp.errors){alert(resp.errors)}
+              else {  this.props.setUser(resp)
+                      this.setState(initialState)
+                      this.props.changeSignup()
+                      this.props.navigation.navigate('Home')
+              }
+            })
     }
 
     render() {
@@ -58,10 +61,10 @@ class Signup extends React.Component {
             <Text>Gender</Text>
             <RadioForm radio_props={radio_props} initial={null} onPress={(value) => {this.setState({male:value})}} />
 
-            <Button title="submit" onPress={() => {createNewUser(); navigation.navigate('Home')}}/>
+            <Button title="submit" onPress={() => createNewUser()}/>
 
             <TouchableOpacity onPress={() => changeSignup()}>
-                    <Text>Sign Up Instead</Text>
+                    <Text>Log In Instead</Text>
             </TouchableOpacity>
 
         </View>
