@@ -8,19 +8,20 @@ import EditLog from './EditLog';
 class History extends React.Component {
 
 state = {
-    filter: '',
-    edit: false,
-    editBeer: {}
+    filter: 'NF',
 }
 
-editLog = (beer) => {
-    this.setState({edit: true, editBeer: beer})
-}
+deletePost = (beer) => {
+    fetch(`${this.props.ngrokURL}/user_beers/${beer.id}`, {
+     method: 'DELETE'
+     })
+     this.props.removeBeer(beer)
+ }
 
 render () {
-const {userBeers, dbBeers} = this.props
+const {userBeers, dbBeers, ngrokURL, removeBeer} = this.props
 const {filter, edit, editBeer} = this.state
-const {editLog} = this
+const {editLog, deletePost} = this
 
 let history = userBeers.map(uBeer => {
     return {
@@ -53,11 +54,11 @@ return (
 />
     <Text></Text>    
     <ScrollView>
-        {history.map(uBeer => <HistoryCard key={uBeer.id} beer={uBeer} editLog={editLog}/>)}
+        {history.map(uBeer => <HistoryCard key={uBeer.id} beer={uBeer} deletePost={deletePost}/>)}
     </ScrollView>
     </View>
     :
-    <EditLog beer={editBeer}/>
+    <EditLog ngrokURL={ngrokURL}beer={editBeer} removeBeer={removeBeer}/>
 );
 }
 }

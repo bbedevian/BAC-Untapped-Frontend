@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, Dimensions, Image } from 'react-native';
 import {LineChart} from "react-native-chart-kit";
 import QuickLog from './QuickLog';
 
@@ -121,6 +121,7 @@ render() {
         // dont show graph when loading
         : <View style={styles.soberBox}>
             <Text style={styles.soberText}>Log a beer once youve finished drinking it to begin tracking.</Text>
+            <Image style={styles.beergif} source={{uri: 'https://media.giphy.com/media/WodWN12m0ACQp7uaAW/giphy.gif'}}/>
         </View>  }
         </>
     )
@@ -151,10 +152,15 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
     },
     soberText: {
-        fontSize: 25
+        fontSize: 25,
+        textAlign: 'center'
     },
     soberBox: {
         
+    },
+    beergif: {
+        height: 300,
+          resizeMode: 'contain',
     }
   
 })

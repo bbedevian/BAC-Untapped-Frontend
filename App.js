@@ -35,6 +35,10 @@ class App extends Component {
       )  
   } 
 
+  removeBeer = (beer) => {
+    this.setState({userBeers: this.state.userBeers.filter(ub => ub.id !== beer.id)})
+  }
+
   addToDB = (beer) => {
     this.setState({dbBeers: [...this.state.dbBeers, beer]})
   }
@@ -61,7 +65,7 @@ class App extends Component {
 
   render () {
     const {dbBeers, userBeers, currentUser} = this.state
-    const {setUser, addNewBeer, addToDB, getDBbeers, ngrokURL} = this
+    const {setUser, addNewBeer, addToDB, getDBbeers, ngrokURL, removeBeer} = this
     return (
       <NavigationContainer> 
         <Stack.Navigator initialRouteName="LoginSignup" screenOptions={{
@@ -75,7 +79,7 @@ class App extends Component {
           {props => <LoginSignup {...props} setUser={setUser} ngrokURL={ngrokURL}/>}
           </Stack.Screen> 
 
-          <Stack.Screen name="Search">
+          <Stack.Screen name="Log a new Beer">
           {props => <Search {...props} addNewBeer={addNewBeer} ngrokURL={ngrokURL} dbBeers={dbBeers} addToDB={addToDB} getDBbeers={getDBbeers}/>}
           </Stack.Screen> 
 
@@ -91,7 +95,7 @@ class App extends Component {
           </Stack.Screen> 
 
           <Stack.Screen name="History">
-          {props => <History {...props} userBeers={userBeers} dbBeers={dbBeers}/>}
+          {props => <History {...props} userBeers={userBeers} dbBeers={dbBeers} ngrokURL={ngrokURL} removeBeer={removeBeer}/>}
           </Stack.Screen> 
 
           <Stack.Screen name="Analytics">

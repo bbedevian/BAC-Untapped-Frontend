@@ -4,6 +4,13 @@ import RadioForm from 'react-native-simple-radio-button';
 import BeerCard from './BeerCard';
 
 class EditLog extends Component {
+
+deletePost = () => {
+       fetch(`${this.props.ngrokURL}/user_beers/${this.props.beer.id}`, {
+        method: 'DELETE'
+        })
+        this.props.removeBeer(this.props.beer)
+    }
     
     render() {
         const {beer} = this.props
@@ -16,10 +23,11 @@ class EditLog extends Component {
           ];
         return (
             <View style={styles.servingBox}>
-                <BeerCard beer={beer}/> 
-                <Text>Select your serving size</Text>
-                <RadioForm radio_props={radio_props} initial={beer.size} onPress={(value) => selectServing(value)} />
+                
+                <Text>Change serving size</Text>
+                <RadioForm radio_props={radio_props} initial={beer.size} />
                 <Button title="save changes"/>
+                <Button title="Delete this log" onPress={() => this.deletePost()}/>
             </View>
         );
     }

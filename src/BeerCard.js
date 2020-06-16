@@ -1,14 +1,14 @@
 import React from 'react';
-import { Image, StyleSheet, View, Text, TouchableHighlight, ImageBackground } from 'react-native';
+import { Image, StyleSheet, View, Text, TouchableNativeFeedback, } from 'react-native';
 
 const BeerCard = (props) => {
     const {beer, selectBeer} = props
     return (
      beer.beer_label ? 
         <View style={styles.beerBox}>
-            <TouchableHighlight onPress={() => selectBeer(beer)}>
+            <TouchableNativeFeedback onPress={() => selectBeer(beer)}>
             <Image style={styles.beerLogo} source={{uri: `${beer.beer_label}`}} />
-            </TouchableHighlight>
+            </TouchableNativeFeedback>
             <Text style={styles.textRight}>{beer.beer_name}</Text>
             <Text style={styles.textRight}>ABV: {beer.beer_abv} %</Text>
             </View>

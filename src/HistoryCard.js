@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
-import { TouchableHighlight } from 'react-native-gesture-handler';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const HistoryCard = (props) => {
-    const {beer, editLog} = props
+    const {beer, editLog, deletePost} = props
     let logMo = beer.time.getMonth()
     let logDate = beer.time.getDate()
     let logYr = beer.time.getYear()
@@ -16,9 +16,9 @@ const HistoryCard = (props) => {
                 <Text>Size: {beer.size} ozs</Text>
                 <Text>ABV: {beer.abv} %</Text>
                 <Text>Calories: {calories}</Text>
-                <TouchableHighlight onPress={() => editLog(beer)}>
-                    <Text>✏️</Text>
-                </TouchableHighlight>
+                <TouchableWithoutFeedback onPress={() => deletePost(beer)}>
+                    <Text>❌ Delete Log ❌</Text>
+                </TouchableWithoutFeedback>
                 <Text></Text>
             </View>
     );
