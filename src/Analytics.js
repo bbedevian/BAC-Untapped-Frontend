@@ -23,7 +23,8 @@ const Analytics = (props) => {
     return (
 
     <View style={styles.container}>
-    <Text style={styles.text}>Beers logged since {firstBeerMo}/{firstBeerDay}/{firstBeerYr}</Text>
+    <Text style={styles.text}>Beers logged since joining</Text>
+    <Text style={styles.text}>on {firstBeerMo}/{firstBeerDay}/{firstBeerYr}</Text>
     <Text style={styles.bigFont}>{total}</Text>
     <Text style={styles.text}>You average drinks per day:</Text>
     <Text style={styles.bigFont}>{bpd} </Text>
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: 'rgb(255,205,0)',
         justifyContent: 'center',
+        
     },
     text: {
         fontSize: 25,

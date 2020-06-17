@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, Button, StyleSheet} from 'react-native';
 import Visualizer from './Visualizer';
-import { TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
+import {TouchableOpacity } from 'react-native-gesture-handler';
 
 
 class Home extends Component {
@@ -12,9 +12,9 @@ class Home extends Component {
             <View style={styles.container}>
                 <Visualizer userBeers={userBeers} dbBeers={dbBeers} currentUser={currentUser} addNewBeer={addNewBeer}/>
                  <View style={styles.actionViews}>
-                    <TouchableHighlight style={styles.actionBox} onPress={() => navigation.navigate('Analytics')} >
+                    <TouchableOpacity style={styles.actionBox} onPress={() => navigation.navigate('Analytics')} >
                         <Text style={styles.actionText}>📊Analytics</Text>
-                    </TouchableHighlight>
+                    </TouchableOpacity>
                     <TouchableOpacity style={styles.actionBox} onPress={() => navigation.navigate('History')} >
                         <Text style={styles.actionText}>🗒Log History</Text>
                     </TouchableOpacity>

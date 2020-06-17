@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     },
     beergif: {
         height: 300,
-          resizeMode: 'contain',
+        // resizeMode: 'contain',
     }
   
 })

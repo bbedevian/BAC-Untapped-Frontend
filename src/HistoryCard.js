@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Button } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const HistoryCard = (props) => {
-    const {beer, editLog, deletePost} = props
+    const {beer, deletePost} = props
     let logMo = beer.time.getMonth()
     let logDate = beer.time.getDate()
     let logYr = beer.time.getYear()
