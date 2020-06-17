@@ -44,7 +44,7 @@ class Search extends React.Component {
   
     getBeers = () => {
         const {search} = this.state
-      fetch(`https://api.untappd.com/v4/search/beer?q=${search}&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`)
+        fetch(`${this.props.ngrokURL}/utbeers/${search}`)
         .then(response => response.json())
         .then(beers => this.findBeers(beers.response.beers.items))
         .then(this.changeSearch(''))
