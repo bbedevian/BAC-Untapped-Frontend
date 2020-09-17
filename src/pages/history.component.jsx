@@ -1,8 +1,8 @@
 import React from 'react';
 import {ScrollView, View, Text } from 'react-native';
-import HistoryCard from './HistoryCard';
+import HistoryCard from '../components/history-card.component';
 import DropDownPicker from 'react-native-dropdown-picker';
-import EditLog from './EditLog';
+import EditLog from '../components/edit-log.component';
 
 
 class History extends React.Component {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Dimensions, Image } from 'react-native';
 import {LineChart} from "react-native-chart-kit";
-import QuickLog from './QuickLog';
+import QuickLog from './quick-log.component';
 
 let today = new Date();
 

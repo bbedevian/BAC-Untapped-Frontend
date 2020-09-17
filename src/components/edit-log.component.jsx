@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, Button} from 'react-native';
 import RadioForm from 'react-native-simple-radio-button';
-import BeerCard from './BeerCard';
+import BeerCard from './beer-card.component';
 
 class EditLog extends Component {
 

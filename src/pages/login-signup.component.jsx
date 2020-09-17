@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Dimensions, ImageBackground, Image} from 'react-native';
-import Login from './Login';
-import Signup from './Signup';
+import Login from '../components/login.component';
+import Signup from '../components/signup.component';
 
 
 

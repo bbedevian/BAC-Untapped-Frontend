@@ -1,6 +1,6 @@
 
-
-Still need to do:
-- settings view PATCH to user weight
-- check password on fake login
-- Style Analytics page
+to do Redux Refactor: 
+- Set current user 
+    - rework login signup 
+    - async userbeers method 
+- user beers actions, selector, types, reducer

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet} from 'react-native';
-import BeerCard from './BeerCard'
+import BeerCard from './beer-card.component'
 
 
 const CardContainer = (props) => {

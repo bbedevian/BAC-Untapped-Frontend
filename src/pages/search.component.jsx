@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button } from 'react-native';
-import CardContainer from './CardContainer'
-import { CLIENT_ID, CLIENT_SECRET } from 'react-native-dotenv'
-import BeerCard from './BeerCard';
-import Serving from './Serving';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Image } from 'react-native';
+import CardContainer from '../components/card-container.component'
+// import { CLIENT_ID, CLIENT_SECRET } from 'react-native-dotenv'
+import BeerCard from '../components/beer-card.component';
+import Serving from '../components/serving.component';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 
 class Search extends React.Component {
@@ -76,6 +76,10 @@ class Search extends React.Component {
             <TouchableOpacity style={styles.button} onPress={() => getBeers()} >
                <Text>Search</Text>
               </TouchableOpacity>
+              <Text></Text>
+              <Text></Text>
+              <Text style={{textAlign: 'center'}}>Powered by</Text>
+              <Image style={styles.logo}source={{uri: 'https://champps.com/wp-content/uploads/2017/10/untappd.png'}}/>
             </View>
             }
           </View>
@@ -88,8 +92,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'rgb(255,205,0)',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center'
   },
   inputField: {
     height: 40, 
@@ -98,4 +102,9 @@ const styles = StyleSheet.create({
     borderColor: 'gray', 
     borderWidth: 1 
 },
+logo: {
+  height: 200,
+  resizeMode: 'contain',
+  justifyContent: 'center', 
+}
 });

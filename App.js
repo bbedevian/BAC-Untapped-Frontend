@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import { StyleSheet, Image } from 'react-native';
-import LoginSignup from './src/LoginSignup';
-import Home from './src/Home'
-import Search from './src/Search'
-import History from './src/History'
-import Analytics from './src/Analytics'
-import Settings from './src/Settings'
-import Info from './src/Info'
+import LoginSignup from './src/pages/login-signup.component';
+import Home from './src/pages/home.component'
+import Search from './src/pages/search.component'
+import History from './src/pages/history.component'
+import Analytics from './src/pages/analytics.component'
+import Settings from './src/pages/settings.component'
+import Info from './src/pages/info.component'
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -23,7 +23,7 @@ class App extends Component {
     dbBeers: []
   }
 
-  ngrokURL = 'https://36846b13b069.ngrok.io'
+  ngrokURL = 'https://34dff969530e.ngrok.io'
 
   componentDidMount() { this.getDBbeers() }
 

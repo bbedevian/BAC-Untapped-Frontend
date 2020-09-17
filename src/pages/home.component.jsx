@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, Button, StyleSheet} from 'react-native';
-import Visualizer from './Visualizer';
+import Visualizer from '../components/visualizer.component';
 import {TouchableOpacity } from 'react-native-gesture-handler';
 
 
