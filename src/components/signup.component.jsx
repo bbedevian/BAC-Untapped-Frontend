@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, TextInput, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import {connect} from 'react-redux'
 import RadioForm from 'react-native-simple-radio-button';
 
 const initialState = {name: null, weight: null, male: null, password: null}
@@ -26,7 +27,7 @@ class Signup extends React.Component {
             })
             .then(resp => {
               if (resp.errors){alert(resp.errors)}
-              else {  this.props.setUser(resp)
+              else {  this.props.setCurrentUser(resp)
                       this.setState(initialState)
                       this.props.changeSignup()
                       this.props.navigation.navigate('Home')
@@ -71,7 +72,11 @@ class Signup extends React.Component {
     }
 }
 
-export default Signup;
+const mdp = (dispatch) => ({
+    setCurrentUser: user => dispatch(setCurrentUser(user))
+  })
+
+export default connect(null, mdp)(Signup);
 
 const styles = StyleSheet.create({
     inputField: {

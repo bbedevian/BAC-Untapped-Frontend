@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Image } from 'react-native';
 import CardContainer from '../components/card-container.component'
-// import { CLIENT_ID, CLIENT_SECRET } from 'react-native-dotenv'
 import BeerCard from '../components/beer-card.component';
 import Serving from '../components/serving.component';
 import { TouchableHighlight } from 'react-native-gesture-handler';
+import {connect} from 'react-redux'
+import {getDbBeers} from '../redux/db-beers/db-beers.actions'
 
 class Search extends React.Component {
     
@@ -86,7 +87,18 @@ class Search extends React.Component {
         );
     }}
 
-export default Search;
+    const msp = ({dbBeers}) => ({
+      dbBeers: dbBeers.dbBeers
+    })
+
+    const mdp = (dispatch) => {
+      return {
+          getDBbeers: (beers) => dispatch(getDbBeers(beers)),
+      }
+    }
+  
+
+export default connect(msp, mdp)(Search);
 
 const styles = StyleSheet.create({
   container: {

@@ -2,12 +2,6 @@ Welcome!
 This is the front end of my app "BAC Untapped".
 It is written in React Native and has, at the moment, only been tested on an android emulator. 
 
-to do Redux Refactor: 
-- Set current user 
-    - rework login signup 
-    - async userbeers method 
-- user beers actions, selector, types, reducer
-
 In order to get this up and running you need 2 things:
 1) the backend! it can be found here https://github.com/bbedevian/BAC-Untapped-Backend
 2) An Untappd API key and secret. This is required for the backend to perform the search properly.
@@ -30,3 +24,9 @@ Things planned to iplement:
 - Allow users to check in to Untappd social network from my app. 
 - Refactor using redux state management. I think this would clean up the code a considerable amount. 
 
+
+to do Redux Refactor: 
+- Set current user 
+    - rework login signup 
+    - async userbeers method 
+- user beers actions, selector, types, reducer

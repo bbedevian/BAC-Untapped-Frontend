@@ -1,16 +1,9 @@
 import { combineReducers } from 'redux';
-// import userReducer from './user/user.reducer';
-import {persistReducer} from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
+import userReducer from './user/user.reducer';
+import dbBeersReducer from './db-beers/db-beers.reducer'
 
-const persistConfig = {
-    key: 'root',
-    storage,
-    whitelist: ['cart']
-}
-
-const rootReducer = combineReducers({
+export default rootReducer = combineReducers({
     user: userReducer,
+    dbBeers: dbBeersReducer
 })
 
-export default persistReducer(persistConfig, rootReducer)

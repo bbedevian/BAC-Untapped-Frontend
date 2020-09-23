@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
+import {connect} from 'react-redux'
+import {setCurrentUser} from '../redux/user/user.actions'
 
 class Login extends React.Component {
     state = {
@@ -22,7 +24,7 @@ class Login extends React.Component {
        let user = this.state.users.find(user => user.name.toLowerCase() === this.state.name.toLowerCase())
        if (user) {
            if (user.password === this.state.password) {
-            this.props.setUser(user)
+            this.props.setCurrentUser(user)
             this.setState({name: ''})
             this.props.changeLogin()  
             this.props.navigation.navigate('Home')
@@ -61,7 +63,11 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+const mdp = (dispatch) => ({
+        setCurrentUser: (user) => dispatch(setCurrentUser(user))
+  }
+)
+export default connect(null, mdp)(Login);
 
 const styles = StyleSheet.create({
     inputField: {

@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux'
 import { Text, View, Button, StyleSheet, TouchableOpacity, ImageBackground} from 'react-native';
 
 const Settings = (props) => {
@@ -10,7 +11,11 @@ const Settings = (props) => {
     );
 }
 
-export default Settings;
+const msp = ({user}) => ({
+    currentUser: user.currentUser
+  })
+
+export default connect(msp)(Settings);
 
 const styles = StyleSheet.create({
     username: {

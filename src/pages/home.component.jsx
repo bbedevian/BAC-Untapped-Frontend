@@ -1,16 +1,28 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
 import { Text, View, Button, StyleSheet} from 'react-native';
 import Visualizer from '../components/visualizer.component';
 import {TouchableOpacity } from 'react-native-gesture-handler';
+import {getDbBeers} from '../redux/db-beers/db-beers.actions'
 
 
 class Home extends Component {
+
+    componentDidMount() { this.getDBbeers() }
+
+    getDBbeers = () => {
+        fetch(`${this.props.ngrokURL}/beers`)
+            .then(response => response.json())
+            .then(beers => this.props.getDBbeers(beers))
+      }
+    
+
     render() {
-        const {userBeers, dbBeers, currentUser, navigation, addNewBeer} = this.props
+        const {userBeers, currentUser, navigation, addNewBeer} = this.props
         return (
             <>
             <View style={styles.container}>
-                <Visualizer userBeers={userBeers} dbBeers={dbBeers} currentUser={currentUser} addNewBeer={addNewBeer}/>
+                <Visualizer userBeers={userBeers} currentUser={currentUser} addNewBeer={addNewBeer}/>
                  <View style={styles.actionViews}>
                     <TouchableOpacity style={styles.actionBox} onPress={() => navigation.navigate('Analytics')} >
                         <Text style={styles.actionText}>📊Analytics</Text>
@@ -32,7 +44,17 @@ class Home extends Component {
     }
 }
 
-export default Home;
+const msp = ({user}) => ({
+    currentUser: user.currentUser
+  })
+
+  const mdp = (dispatch) => {
+    return {
+        getDBbeers: (beers) => dispatch(getDbBeers(beers)),
+    }
+  }
+
+export default connect(msp, mdp)(Home);
 
 
 const styles = StyleSheet.create({

@@ -3,6 +3,7 @@ import {ScrollView, View, Text } from 'react-native';
 import HistoryCard from '../components/history-card.component';
 import DropDownPicker from 'react-native-dropdown-picker';
 import EditLog from '../components/edit-log.component';
+import {connect} from 'react-redux'
 
 
 class History extends React.Component {
@@ -63,4 +64,10 @@ return (
 }
 }
 
-export default History;
+
+const msp = ({dbBeers}) => ({
+    dbBeers: dbBeers.dbBeers
+  })
+
+
+export default connect(msp)(History);

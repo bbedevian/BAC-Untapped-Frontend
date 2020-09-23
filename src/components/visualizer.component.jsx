@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux'
 import { StyleSheet, View, Text, Dimensions, Image } from 'react-native';
 import {LineChart} from "react-native-chart-kit";
 import QuickLog from './quick-log.component';
@@ -128,7 +129,12 @@ render() {
         }
 }
 
-export default Visualizer;
+const msp = ({user, dbBeers}) => ({
+    currentUser: user.currentUser,
+    dbBeers: dbBeers.dbBeers
+  })
+
+export default connect(msp)(Visualizer);
 
 const styles = StyleSheet.create({
     factBox: {

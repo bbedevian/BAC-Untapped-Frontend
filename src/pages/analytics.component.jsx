@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text} from 'react-native';
+import {connect} from 'react-redux'
 
 
 const avgABV = (uBeers, dbBeers) => {
@@ -41,7 +42,12 @@ const Analytics = (props) => {
     }
 }
 
-export default Analytics;
+const msp = ({dbBeers}) => ({
+    dbBeers: dbBeers.dbBeers
+  })
+
+
+export default connect(msp)(Analytics);
 
 const styles = StyleSheet.create({
     container: {
