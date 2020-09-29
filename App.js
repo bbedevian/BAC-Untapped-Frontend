@@ -19,47 +19,30 @@ const Stack = createStackNavigator();
 
 class App extends Component {
 
-  state = {
-    userBeers:[]
-  }
+  // removeBeer = (beer) => {
+  //   this.setState({userBeers: this.state.userBeers.filter(ub => ub.id !== beer.id)})
+  // }
 
-  ngrokURL = 'https://5b3cb1d4260c.ngrok.io'
+  // addToDB = (beer) => {
+  //   this.setState({dbBeers: [...this.state.dbBeers, beer]})
+  // }
 
-  // componentDidMount() { this.getDBbeers() }
-
-  // setUser = (user) => 
-  // {fetch(`${this.ngrokURL}/user_beers`)
-  //   .then(response => response.json())
-  //   .then(allUserBeers => 
-  //     this.setState({ currentUser: user, userBeers: allUserBeers.filter(ub => ub.user_id === user.id)})
-  //     )  
-  // } 
-
-  removeBeer = (beer) => {
-    this.setState({userBeers: this.state.userBeers.filter(ub => ub.id !== beer.id)})
-  }
-
-  addToDB = (beer) => {
-    this.setState({dbBeers: [...this.state.dbBeers, beer]})
-  }
-
-  addNewBeer = (selectedBeer, size, currentUser) => {
-    let uBeer = {user_id: currentUser.id, beer_id: selectedBeer.id, size: size}
-    fetch(`${this.ngrokURL}/user_beers`, {
-      method: 'POST',
-      headers: {
-        'accept': 'application/json',
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(uBeer)
-      })
-      .then(response => response.json())
-      .then(json => this.setState({userBeers: [...this.state.userBeers, json]}))
-  }
+  // addNewBeer = (selectedBeer, size, currentUser) => {
+  //   let uBeer = {user_id: currentUser.id, beer_id: selectedBeer.id, size: size}
+  //   fetch(`${this.ngrokURL}/user_beers`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'accept': 'application/json',
+  //       'content-type': 'application/json'
+  //     },
+  //     body: JSON.stringify(uBeer)
+  //     })
+  //     .then(response => response.json())
+  //     .then(json => this.setState({userBeers: [...this.state.userBeers, json]}))
+  // }
 
   render () {
-    const {dbBeers, userBeers} = this.state
-    const { addNewBeer, addToDB, ngrokURL, removeBeer} = this
+    const { addNewBeer, addToDB, removeBeer} = this
     return (
       <Provider store={store}>
       <NavigationContainer> 
@@ -71,11 +54,11 @@ class App extends Component {
         }}>
 
           <Stack.Screen name="LoginSignup" options={{ title: 'BAC Untappd' }}>
-          {props => <LoginSignup {...props} ngrokURL={ngrokURL}/>}
+          {props => <LoginSignup {...props} />}
           </Stack.Screen> 
 
           <Stack.Screen name="Log a new Beer">
-          {props => <Search {...props} addNewBeer={addNewBeer} ngrokURL={ngrokURL} addToDB={addToDB}/>}
+          {props => <Search {...props} addNewBeer={addNewBeer} addToDB={addToDB}/>}
           </Stack.Screen> 
 
           <Stack.Screen name="Home" options={({ navigation }) =>
@@ -86,15 +69,15 @@ class App extends Component {
             </TouchableOpacity>
             ),
             })}>
-          {props => <Home {...props} ngrokURL={ngrokURL} userBeers={userBeers} addNewBeer={addNewBeer}/>}
+          {props => <Home {...props}  addNewBeer={addNewBeer}/>}
           </Stack.Screen> 
 
           <Stack.Screen name="History">
-          {props => <History {...props} userBeers={userBeers} dbBeers={dbBeers} ngrokURL={ngrokURL} removeBeer={removeBeer}/>}
+          {props => <History {...props}  removeBeer={removeBeer}/>}
           </Stack.Screen> 
 
           <Stack.Screen name="Analytics">
-          {props => <Analytics {...props} userBeers={userBeers} dbBeers={dbBeers}/>}
+          {props => <Analytics {...props}/>}
           </Stack.Screen> 
 
           <Stack.Screen name="Settings">

@@ -19,7 +19,7 @@ class LoginSignup extends Component {
     render() {
     const {login, signup} = this.state
     const {changeLogin, changeSignup} = this
-    const { navigation, ngrokURL} = this.props
+    const { navigation} = this.props
         return (
                 <View style={styles.background}>
                 {!login && !signup ? 
@@ -36,8 +36,8 @@ class LoginSignup extends Component {
                 </View>
                 : // either log in or sign up based on above click
                 <View>
-                    {login ?  <Login  navigation={navigation} ngrokURL={ngrokURL} changeLogin={changeLogin}/> : null}
-                    {signup ?  < Signup navigation={navigation} ngrokURL={ngrokURL} changeSignup={changeSignup}/> : null}
+                    {login ?  <Login  navigation={navigation} changeLogin={changeLogin}/> : null}
+                    {signup ?  < Signup navigation={navigation} changeSignup={changeSignup}/> : null}
                 </View>
             }  
             </View>

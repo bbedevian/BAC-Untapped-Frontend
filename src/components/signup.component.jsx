@@ -72,11 +72,15 @@ class Signup extends React.Component {
     }
 }
 
+const msp = ({ngrokURL}) => ({
+    ngrokURL: ngrokURL.ngrokURL
+  })
+
 const mdp = (dispatch) => ({
     setCurrentUser: user => dispatch(setCurrentUser(user))
   })
 
-export default connect(null, mdp)(Signup);
+export default connect(msp, mdp)(Signup);
 
 const styles = StyleSheet.create({
     inputField: {

@@ -129,9 +129,10 @@ render() {
         }
 }
 
-const msp = ({user, dbBeers}) => ({
+const msp = ({user, dbBeers, userBeers}) => ({
     currentUser: user.currentUser,
-    dbBeers: dbBeers.dbBeers
+    dbBeers: dbBeers.dbBeers,
+    userBeers: userBeers.userBeers
   })
 
 export default connect(msp)(Visualizer);

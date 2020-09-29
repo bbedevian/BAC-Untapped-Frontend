@@ -4,25 +4,39 @@ import { Text, View, Button, StyleSheet} from 'react-native';
 import Visualizer from '../components/visualizer.component';
 import {TouchableOpacity } from 'react-native-gesture-handler';
 import {getDbBeers} from '../redux/db-beers/db-beers.actions'
+import {getUserBeers} from '../redux/user-beers/user-beers.actions'
 
 
 class Home extends Component {
 
-    componentDidMount() { this.getDBbeers() }
+    componentDidMount() { 
+        this.getDBbeers() 
+        this.getUserBeers()
+    }
 
     getDBbeers = () => {
         fetch(`${this.props.ngrokURL}/beers`)
             .then(response => response.json())
-            .then(beers => this.props.getDBbeers(beers))
+            .then(beers => this.props.getbeers(beers))
       }
+
+    getUserBeers = () => {
+        fetch(`${this.props.ngrokURL}/user_beers`)
+            .then(response => response.json())
+            .then(beers => 
+                {let filtered = beers.filter(beer => beer.user_id === this.props.currentUser.id)
+                this.props.getUBeers(filtered)}
+                )
+    }  
     
+ 
 
     render() {
-        const {userBeers, currentUser, navigation, addNewBeer} = this.props
+        const {currentUser, navigation, addNewBeer} = this.props
         return (
             <>
             <View style={styles.container}>
-                <Visualizer userBeers={userBeers} currentUser={currentUser} addNewBeer={addNewBeer}/>
+                <Visualizer  currentUser={currentUser} addNewBeer={addNewBeer}/>
                  <View style={styles.actionViews}>
                     <TouchableOpacity style={styles.actionBox} onPress={() => navigation.navigate('Analytics')} >
                         <Text style={styles.actionText}>📊Analytics</Text>
@@ -44,13 +58,17 @@ class Home extends Component {
     }
 }
 
-const msp = ({user}) => ({
-    currentUser: user.currentUser
+const msp = ({user, ngrokURL, dbBeers, userBeers}) => ({
+    currentUser: user.currentUser,
+    ngrokURL: ngrokURL,
+    dbBeers: dbBeers.dbBeers,
+    userBeers: userBeers.userBeers
   })
 
   const mdp = (dispatch) => {
     return {
-        getDBbeers: (beers) => dispatch(getDbBeers(beers)),
+        getbeers: (beers) => dispatch(getDbBeers(beers)),
+        getUBeers: (beers) => dispatch(getUserBeers(beers)),
     }
   }
 

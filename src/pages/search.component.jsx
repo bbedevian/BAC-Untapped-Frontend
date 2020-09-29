@@ -87,8 +87,9 @@ class Search extends React.Component {
         );
     }}
 
-    const msp = ({dbBeers}) => ({
-      dbBeers: dbBeers.dbBeers
+    const msp = ({dbBeers, ngrokURL}) => ({
+      dbBeers: dbBeers.dbBeers,
+      ngrokURL: ngrokURL.ngrokURL
     })
 
     const mdp = (dispatch) => {

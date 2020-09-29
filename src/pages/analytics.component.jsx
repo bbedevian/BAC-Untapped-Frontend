@@ -42,8 +42,9 @@ const Analytics = (props) => {
     }
 }
 
-const msp = ({dbBeers}) => ({
-    dbBeers: dbBeers.dbBeers
+const msp = ({dbBeers, userBeers}) => ({
+    dbBeers: dbBeers.dbBeers,
+    userBeers: userBeers.userBeers
   })
 
 

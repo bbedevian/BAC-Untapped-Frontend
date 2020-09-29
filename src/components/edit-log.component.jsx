@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, Button} from 'react-native';
 import RadioForm from 'react-native-simple-radio-button';
+import {connect} from 'react-redux'
 
 class EditLog extends Component {
 
@@ -32,7 +33,11 @@ deletePost = () => {
     }
 }
 
-export default EditLog;
+const msp = ({ngrokURL}) => ({
+    ngrokURL: ngrokURL
+  })
+
+export default connect(msp)(EditLog);
 
 const styles = StyleSheet.create({
     servingBox: {

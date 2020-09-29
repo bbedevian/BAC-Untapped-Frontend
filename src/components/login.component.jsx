@@ -11,6 +11,7 @@ class Login extends React.Component {
     }
 
     componentDidMount() {
+        console.log('NGROK WHERE ARE YOU!!', this.props.ngrokURL)
         let url = this.props.ngrokURL
         fetch(`${url}/users`)
             .then(response => response.json())
@@ -63,11 +64,16 @@ class Login extends React.Component {
     }
 }
 
+
+const msp = ({ngrokURL}) => ({
+    ngrokURL: ngrokURL.ngrokURL
+  })
+
 const mdp = (dispatch) => ({
         setCurrentUser: (user) => dispatch(setCurrentUser(user))
   }
 )
-export default connect(null, mdp)(Login);
+export default connect(msp, mdp)(Login);
 
 const styles = StyleSheet.create({
     inputField: {

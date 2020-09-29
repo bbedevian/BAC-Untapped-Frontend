@@ -4,6 +4,7 @@ import HistoryCard from '../components/history-card.component';
 import DropDownPicker from 'react-native-dropdown-picker';
 import EditLog from '../components/edit-log.component';
 import {connect} from 'react-redux'
+import ngrokReducer from '../redux/ngrok/ngrok.reducer';
 
 
 class History extends React.Component {
@@ -59,14 +60,16 @@ return (
     </ScrollView>
     </View>
     :
-    <EditLog ngrokURL={ngrokURL}beer={editBeer} removeBeer={removeBeer}/>
+    <EditLog beer={editBeer} removeBeer={removeBeer}/>
 );
 }
 }
 
 
-const msp = ({dbBeers}) => ({
-    dbBeers: dbBeers.dbBeers
+const msp = ({dbBeers, userBeers, ngrokURL}) => ({
+    dbBeers: dbBeers.dbBeers,
+    userBeers: userBeers.userBeers,
+    ngrokURL: ngrokURL.ngrokURL
   })
 
 
